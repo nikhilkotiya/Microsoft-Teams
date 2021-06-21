@@ -7,6 +7,7 @@ from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from django.contrib.auth.forms import PasswordResetForm
+from django.core.mail import EmailMessage
 from email.mime.text import MIMEText
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth import authenticate,logout
@@ -21,6 +22,7 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
+from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode
 from django.views import generic
 from googleapiclient import errors, discovery
@@ -29,7 +31,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google.oauth2 import service_account
-from  .forms import SignUpForm
+from  .forms import SignupForm
 from .models import User
 def home(request):
     return render(request,"landingPage.html")
@@ -44,9 +46,56 @@ def is_active_check(user):
 def login_next(request):
     return HttpResponse("Hello, world. This is a log in page")
 class SignUpView(generic.CreateView):
-    form_class = SignUpForm
+    form_class = SignupForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
+
+
+from django.contrib.auth import get_user_model
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from .token import account_activation_token
+from django.core.mail import send_mail
+
+# def signup(request):
+#     User = get_user_model()
+#     if request.method == 'POST':
+#         form = SignupForm(request.POST)
+#         if form.is_valid():
+#             email = form.cleaned_data.get('email')
+#             if User.objects.filter(email__iexact=email).count() == 1:
+#                 user = form.save(commit=False)
+#                 user.is_active = False
+#                 user.save()
+#                 current_site = get_current_site(request)
+#                 mail_subject = 'Activate your account.'
+#                 message = render_to_string('email_template.html', {
+#                             'user': user,
+#                             'domain': current_site.domain,
+#                             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+#                             'token': account_activation_token.make_token(user),
+#                         })
+#                 to_email = form.cleaned_data.get('email')
+#                 send_mail(mail_subject, message, 'youremail', [to_email])
+#                 return HttpResponse('Please confirm your email address to complete the registration')
+#     else:
+#         form = SignupForm()
+#     return render(request, 'regform.html', {'form': form})
+
+# def activate(request, uidb64, token):
+#     User = get_user_model()
+#     try:
+#         uid = force_text(urlsafe_base64_decode(uidb64))
+#         user = User.objects.get(pk=uid)
+#     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+#         user = None
+#     if user is not None and account_activation_token.check_token(user, token):
+#         user.is_active = True
+#         user.save()
+#         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+#     else:
+#         return HttpResponse('Activation link is invalid!')
+
 def create_message(sender, to, subject, message_text):
     """Create a message for an email.
   Args:
@@ -231,3 +280,44 @@ def email_check(user):
 #             return render(request,"login.html",{"invalid":context})
 #     else:
 #         return render(request,"login.html")
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your blog account.'
+            message = render_to_string('acc_active_email.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': account_activation_token.make_token(user),
+            })            
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(
+                        mail_subject, message, to=[to_email]
+            )
+            email.send()
+            return HttpResponse('Please confirm your email address to complete the registration')
+    else:
+        form = SignupForm()
+    return render(request, 'signup.html', {'form': form})
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        auth_login(request, user)
+        # return redirect('home')
+        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        return HttpResponse('Activation link is invalid!')
