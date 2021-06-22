@@ -1,23 +1,27 @@
-{% extends 'base/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .name{
+            font-size: 30px;
+        }
+        .input{
+            font-size: 20px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 
-
-
-{% block content %}
-<style>
-    .name{
-        font-size: 30px;
-    }
-    .input{
-        font-size: 20px;
-    }
-</style>
 <label class="name">First Name</label>  <input class="input" type="text" name="fname" value="{{f}}">
 <br>
 <br>
 <label class="name">Last Name</label><input class="input" type="text" name="lname" value="{{l}}">
 <br>
 <br>
-<label class="name">Email</label><input class="input" type="email" name="email" value="{{e}}">
-
-
-{% endblock %}
+<!-- <label class="name">Email</label><input class="input" type="email" name="email" value="{{e}}"> -->
+</body>
+</html>

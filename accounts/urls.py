@@ -10,5 +10,6 @@ urlpatterns = [
     path('home/profile/',views.profile,name="profile"),
     path('home/about/',views.about,name="about"),
     path('accounts/', include('allauth.urls')),
+    path('home/profile/',views.profile,name="profile"),
     path('test/',views.test,name='test')
 ]

@@ -13,6 +13,8 @@ def userdashboard(request):
  
 def index(request):
     if request.user.is_authenticated:
+        print(request.user)
+        print(request.email)
         return redirect('home')
     if request.POST.get("form_one"):
         if not User.objects.filter(email=request.POST["email"]).exists():
@@ -107,3 +109,11 @@ def test(request):
     else:
         form=RegistrationForm()
         return render(request,'test.html',{'form':form})
+
+
+def profile(request):
+    f=request.user.first_name
+    l=request.user.last_name
+    e=request.user.email
+    print(e)
+    return render(request,'profile.html' ,{'f':f,'l':l,'e':e})
