@@ -1,0 +1,74 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/base/base2.css' %}">
+</head>
+<body>
+    <nav>
+        <input id="nav-toggle" type="checkbox">
+        <p>
+            {% block content-3 %}
+            {% endblock %}
+        </p>
+        <ul class="links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Profile</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'ulogout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'index' %}">Login</a></li>
+            {% endif %}
+        </ul>
+        <label for="nav-toggle" class="icon-burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </label>
+    </nav>
+        <main>
+            <input id="nav-toggle1" type="checkbox">
+            <ul class="ul-nev">
+        <p class="nev-head">{% block content-2 %}
+            {{context}}
+            {% endblock %}</p>
+        <li class="lefto-nev-li">Chapter 1</li>
+        <li class="lefto-nev-li">Chapter 2</li>
+        <li class="lefto-nev-li">Chapter 3</li>
+        <li class="lefto-nev-li">Chapter 4</li>
+        <li class="lefto-nev-li">Chapter 6</li>
+        <li class="lefto-nev-li">Chapter 5</li>
+        <li class="lefto-nev-li">Chapter 7</li>
+        <li class="lefto-nev-li">Chapter 8</li>
+        <li class="lefto-nev-li">Chapter 9</li>
+        <li class="lefto-nev-li">Chapter 10</li>
+        <li class="lefto-nev-li">Chapter 11</li>
+        <li class="lefto-nev-li">Chapter 12</li>
+        <li class="lefto-nev-li">Chapter 13</li>
+        <li class="lefto-nev-li">Chapter 14</li>
+        <li class="lefto-nev-li">Chapter 15</li>
+        <li class="lefto-nev-li">Chapter 16</li>
+        <li class="lefto-nev-li">Chapter 17</li>
+        <li class="lefto-nev-li">Chapter 18</li>
+    
+    </ul>
+    <label for="nav-toggle1" class="icon-burger1">
+        <div class="line1"></div>
+        <div class="line1"></div>
+        <div class="line1"></div>
+    </label>
+    </main>
+
+{% block content %}
+    
+    {% endblock %}
+
+</body>
+</html>

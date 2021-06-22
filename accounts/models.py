@@ -1,10 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from .manager import MyAccountManager
+# Create your models here.
+from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from .manager import MyAccountManager
 from django.contrib.auth.models import PermissionsMixin
+is_active = (
+    ('True', 'True'),
+    ('False', 'False')
+)
 
-class User(AbstractBaseUser,PermissionsMixin):
+class User(AbstractBaseUser):
     first_name = models.CharField(max_length=20, null=True, blank=False ,verbose_name='first_name')
     email = models.EmailField(null=True, blank=False,unique = True, verbose_name='email')
     last_name = models.CharField(max_length=20,null=True, blank=False,verbose_name='last_name')
@@ -15,6 +20,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False) 
+    is_admin = models.BooleanField(default=False)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     objects = MyAccountManager()
@@ -24,16 +30,8 @@ class User(AbstractBaseUser,PermissionsMixin):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
     def has_perm(self, perm ,obj=None):
-        return self.is_staff
+        return self.is_admin
     def has_module_perms(self,app_Label):
         return True
-    def get_full_name(self):
-        """
-        Return the first_name plus the last_name, with a space in between.
-        """
-        full_name = '%s %s' % (self.first_name, self.last_name)
-        return full_name.strip()
 
-    def get_short_name(self):
-        """Return the short name for the user."""
-        return self.first_name
+# video test done

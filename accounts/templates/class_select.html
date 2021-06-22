@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<style>
+    .select
+    {
+        display: inline-block;
+        border: 1px solid black;
+        font-size: 25px;
+    }
+    .select li{
+        list-style: none;
+        padding: 20px;
+        text-align: center;
+    }
+    .select li a{
+        text-decoration: none;
+    }
+</style>
+<ul class ="select">
+    <li><a href="physics">physics</a></li>
+    <li><a href="chemistry">Chemistry</a></li>
+    <li><a href="maths">Maths</a></li>
+    <li><a href="bio">Bio</a></li>
+    <li><a href="computer">Computer</a></li>
+</ul>
+{% endblock %}
