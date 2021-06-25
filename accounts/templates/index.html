@@ -43,7 +43,7 @@
             <input type="submit" name = "form_two"  value="Login" class="btn solid" >
             <p class="social-text">Or Sign in with social platforms</p>
             <div class="social-media">
-              <a href="{% provider_login_url 'google' %}" class="social-icon">
+              <a href="{% provider_login_url 'google' %}?next={% url 'home' %}" class="social-icon">
                 <i class="fab fa-google"></i>
               </a>
             </div>

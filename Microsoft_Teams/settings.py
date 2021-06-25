@@ -31,7 +31,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     # "chat_box",
     'django_filters',
+    'channels',
     'chat',
+    'chats',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -128,12 +130,18 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = "accounts.User" 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'gagankotiya494@gmail.com'
-EMAIL_HOST_PASSWORD = 'mYC00lP4ssw0rd'  # os.environ['password_key'] suggested
-EMAIL_USE_TLS = True
+ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False

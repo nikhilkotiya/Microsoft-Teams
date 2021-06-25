@@ -10,7 +10,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('accounts/',include('allauth.urls')),
     # path('feed/',include('blog.urls')),
-    path('messages/',include('chat.urls')),
-    # path('blogapi/',include('blogapi.urls')),
-    # path('chat_box/',include('chat_box.urls')),
+    path('',include('chat.urls')),
+    # path('blogapi/',include('blogapi.urls')), 
+    path('private/',include('chats.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
