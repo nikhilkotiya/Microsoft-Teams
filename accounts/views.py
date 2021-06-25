@@ -10,15 +10,40 @@ from django.contrib.auth import authenticate, login
 from .forms import RegistrationForm 
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.utils.encoding import force_bytes,force_str,force_text,DjangoUnicodeDecodeError 
+from .utils import generator_token
+from django.core.mail import EmailMessage
+from django.conf import settings
 def userdashboard(request):
     return render(request,'2ndtemp.html')
-
-
 def send_action_email(user,request):
     current_site = get_current_site(request)
     email_subject = 'Activate your account'
-    email_body = render.string('authentication/activate.html')
+    email_body = render_to_string('activate.html',{
+        'user':user,
+        'domain':current_site,
+        'uid':urlsafe_base64_encode(force_bytes(user.pk )),
+        'token': generator_token.make_token(user)
+    })
+    email=EmailMessage(subject=email_subject,body=email_body,
+                from_email = settings.EMAIL_FROM_USER,
+                to = [user.email]
+                )
+    email.send() 
+def activate_user(request,uidb64,token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except Exception as e:
+        user = None
+    if user and generator_token.check_token(user,token):
+        user.is_email_verified = True
+        user.save()
+        messages.add_message(request,messages.SUCCESS,'Email Varified, Now you can login')
+        return redirect(reversed('login'))
 
+    return render(request,'activate-failed.html',{"user":user})
 
 def index(request):
     if request.user.is_authenticated:
@@ -37,7 +62,7 @@ def index(request):
                     data.email = request.POST["email"]
                     print(data.email)
                     data.save()
-                    send_action_email(user,request)
+                    send_action_email(data,request)
                     print("user saved")
                     messages.success(request, 'Account crated succesfully.')
                     return render(request,"index.html")
