@@ -8,9 +8,10 @@ is_active = (
     ('True', 'True'),
     ('False', 'False')
 )
-
 class User(AbstractUser):
+    username= None
     email = models.EmailField(unique = True, verbose_name='email')
+    is_email_verified = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = MyAccountManager()

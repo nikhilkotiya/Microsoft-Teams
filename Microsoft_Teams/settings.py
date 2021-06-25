@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     # "chat_box",
     'django_filters',
     'channels',
+    'captcha',
     'chat',
     'chats',
     'allauth',
@@ -145,3 +146,19 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'gagankotiya494@gmail.com'
+EMAIL_HOST_PASSWORD = 'your gmail password'
+EMAIL_BACKEND = (
+        "django.core.mail.backends.smtp.EmailBackend"
+    )
+
+
+RECAPTCHA_PUBLIC_KEY = "6LfNIlcbAAAAAAU4TEruOcQdvsbuZDhE5CPnGz4W"
+RECAPTCHA_PRIVATE_KEY = "6LfNIlcbAAAAAAcecCz5uoDbN6kPgJal0dd6W2Fk"
+
+RECAPTCHA_REQUIRED_SCORE = 0.85

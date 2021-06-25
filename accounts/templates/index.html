@@ -10,18 +10,22 @@
       crossorigin="anonymous"
     ></script>
     <style>
-      .messages{
+      .success{
         background-color: greenyellow;
       }
+      .error{
+        background-color: red;
+      }
+      
     </style>
     <link rel="stylesheet"  href="{% static 'style.css' %}">
     <title>Sign in & Sign up Form</title>
   </head>
   <body>
     {% if messages %}
-<ul class="messages">
+<ul class="{{ message.tags }}">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{message }}</li>
     {% endfor %}
 </ul>
 {% endif %}
@@ -40,6 +44,7 @@
               <input type="password" name="password" placeholder="Password" required>
             </div>
             {{invalid}}
+            <div class="g-recaptcha" data-sitekey="6LfNIlcbAAAAAAU4TEruOcQdvsbuZDhE5CPnGz4W"></div>
             <input type="submit" name = "form_two"  value="Login" class="btn solid" >
             <p class="social-text">Or Sign in with social platforms</p>
             <div class="social-media">
@@ -119,7 +124,7 @@
         </div>
       </div>
     </div>
-
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="{% static 'app.js' %}"></script>
   </body>
 </html>

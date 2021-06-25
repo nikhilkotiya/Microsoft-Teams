@@ -4,12 +4,22 @@ from django.shortcuts import render,redirect
 from .models import User
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import HttpResponse 
+import requests
 from django.contrib.auth import authenticate, login
 # Create your views here.
 from .forms import RegistrationForm 
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
 def userdashboard(request):
     return render(request,'2ndtemp.html')
- 
+
+
+def send_action_email(user,request):
+    current_site = get_current_site(request)
+    email_subject = 'Activate your account'
+    email_body = render.string('authentication/activate.html')
+
+
 def index(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -27,6 +37,7 @@ def index(request):
                     data.email = request.POST["email"]
                     print(data.email)
                     data.save()
+                    send_action_email(user,request)
                     print("user saved")
                     messages.success(request, 'Account crated succesfully.')
                     return render(request,"index.html")
@@ -45,9 +56,23 @@ def index(request):
     elif request.POST.get("form_two"):
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user = authenticate(request,username=email, password=password)
-        print(user)
+        captcha_token = request.POST.get("g-recaptcha-response")
+        cap_url = "https://www.google.com/recaptcha/api/siteverify"
+        cap_secret = "6LfNIlcbAAAAAAcecCz5uoDbN6kPgJal0dd6W2Fk"
+        cap_data ={"secret":cap_secret,"response":captcha_token}
+        cap_server_response = requests.post(url=cap_url,data=cap_data)
+        print(cap_server_response.text)
 
+        result = cap_server_response.json()
+        if result['success']==False:
+            messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+            return render(request,"index.html")
+        user = authenticate(request,username=email, password=password)
+
+        if not user.is_email_verified:
+            messages.error(request, 'Email is not verified')
+            return render(request,"index.html")
+        print(user)
         if user is not None:
             login(request, user)
             print('welcome')
@@ -65,55 +90,26 @@ def ulogout(request):
     logout(request)
     return redirect('index')
 
-
-# def profile(request):
-#     f=request.user.first_name
-#     l=request.user.last_name
-#     e=request.user.username
-#     print(f)
-#     print(l)
-#     print(e)
-#     return render(request,'profile.html' ,{'f':f,'l':l,'e':e})
-
-
 def about(request):
     return  HttpResponse("About page")
+def send_email_to_user(otp,email):
+    import smtplib
+    con = smtplib.SMTP("smtp.gmail.com",587)
+    con.ehlo()
+    con.starttls()
+    admin_email = "email"
+    admin_password = "password"
+    con.login(admin_email,admin_password)
+    msg = "Otp is "+str(otp)
+    con.sendmail("email",email,"Subject:Password Reset \n\n"+msg)
 
-
-# def test(request):
-#     if request.method == 'POST':
-#         form=RegistrationForm(request.POST)
-        # data.password=request.POST["password"]
-        # data.first_name=request.POST["first_name"]
-        # data.last_name=request.POST["last_name"]
-        # data.username=request.POST["username"]
-        # data.email = request.POST["email"]
-        # data.is_active = True
-        # data.is_superuser=False
-        # data.is_admin=False
-        # print(data.first_name)
-        # print(data.last_name)
-        # print(data.email)
-        # print(data.password)
-        # print(data.username)
-        # print(data.is_active)
-        # print(data.is_superuser)
-        # print(data.is_admin)
-    #     if form.is_valid():
-    #         form.save()
-    #         print("user saved")
-    #     else:
-    #         print("Error")
-    #     form=RegistrationForm()
-    #     return HttpResponse(form.errors) 
-    # else:
-    #     form=RegistrationForm()
-    #     return render(request,'test.html',{'form':form})
-
-
-# def profile(request):
-#     f=request.user.first_name
-#     l=request.user.last_name
-#     e=request.user.email
-#     print(e)
-#     return render(request,'profile.html' ,{'f':f,'l':l,'e':e})
+def send_warning_email(email):
+    import smtplib
+    con = smtplib.SMTP("smtp.gmail.com",587)
+    con.ehlo()
+    con.starttls()
+    admin_email = "your email"
+    admin_password = "your password"
+    con.login(admin_email,admin_password)
+    msg = "Some One is Trying To Login With Your Account !!"
+    con.sendmail(admin_email,email,"Subject:Login Warning \n\n"+msg)
