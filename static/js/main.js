@@ -4,7 +4,7 @@ console.log("working");
 var labelUsername=document.querySelector('#label-username');
 var usernameInput=document.querySelector('#username'); 
 var btnJoin=document.querySelector('#btn-join'); 
-
+var count;
 var username;
 var mapPeers={};
 var webSocket;
@@ -161,7 +161,6 @@ function createOfferer(peerUsername,receiver_channel_name){
     var dc = peer.createDataChannel('channel');
     dc.addEventListener('open',() =>{
         console.log("Create offerer ");
-        count++;
         // It is used to import collect.js library
     });
     dc.addEventListener('message',dcOnMessage);
@@ -173,7 +172,6 @@ function createOfferer(peerUsername,receiver_channel_name){
     peer.addEventListener('iceconnectionstatechange',()=>{
         var iceConnectionState=peer.iceConnectionState;
         if(iceConnectionState==='failed' || iceConnectionState==='disconnected'||iceConnectionState==='closed'){
-            count--;
             delete mapPeers[peerUsername];
             console.log("Try to dissconnect !");
             if(iceConnectionState != 'closed'){
@@ -214,10 +212,8 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
         peer.dc=e.channel; 
         peer.dc.addEventListener('open',() =>{
             console.log("connection opend");
-            count++;
         });
         peer.dc.addEventListener('message',dcOnMessage);
-        
         mapPeers[peerUsername]=[peer,peer.dc];
     });
 
@@ -225,7 +221,6 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
         var iceconnectionState=peer.iceConnectionState;
 
         if(iceconnectionState==='failed' || iceconnectionState==='disconnected'||iceconnectionState==='closed'){
-            count--;
             delete mapPeers[peerUsername];
             console.log("Try to dissconnect !");
             if(iceconnectionState != 'closed'){
