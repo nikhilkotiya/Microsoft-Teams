@@ -30,7 +30,7 @@
     </style>
 </head>
 
-<body>
+<body >
     <input type="hidden" name="smname" id="smname" />
     <a href="/home"><button>Go Home</button></a>
     <h3 id="label-username" type="hidden"></h3>
@@ -40,7 +40,7 @@
     </div>
     <div class="main-grid-container">
         <div id="video-container">
-            <div><video id="local-video" style="float: left ;" autoplay playsinline></video></div>
+            <div><video id="local-video" style="float:left ;" autoplay playsinline></video></div>
             <button id="btn-toggle-audio">Audio Mute</button>
             <button id="btn-toggle-video">Video Off</button>
             <div id="chat" style="float:right; top: 0%; margin-top: 0; background-color: black;  ">
@@ -50,7 +50,7 @@
                 <hr style="color:white;">
                 <div id="messages">
     
-                    <ul id="message-list" style="color:white;"></ul>
+                    <ul id="message-list" style="color:white; max-width:200px; word-wrap:break-word;"></ul>
                 </div>
                 <div>
                     <input id="msg" required><button required id="btn-send-msg">Send Messages</button>
