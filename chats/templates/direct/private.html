@@ -6,121 +6,81 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Teams</title>
-    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
   </head>
 <body>
-  <div class="columns is-mobile">
-  
-
-  <div class="column is-one-quarter">
-  <aside class="menu">
-    <h1 class="title is-2">
-    Messages
-    </h1>
-  <ul>
-
-{% for message in messages %}
-
-<a class="{% if active_direct == message.user.username %}is-active{% endif %}" href="{% url 'directs' message.user.email %}">
-<div class="box">
-  <article class="media">
-    <div class="media-content">
-
-      <!-- <div class="content">
-        <p>
-          User {{ message.user.profile.username}} 
-          <br>
-          <small>{{ message.user.email }}</small>
-        </p>
+<div class="center">
+<div class="container content">
+  <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="card">
+              <div class="card-header">
+                Chat
+                <a href="/private" style="float: right; text-decoration: none; color: white;" >Go Back</a>
+              </div>
+              <div class="card-body height3">
+                  <ul class="chat-list">
+                    {% for direct in directs %}
+                    {% if request.user.email == direct.sender.email %} 
+                      <!-- right side -->
+                      <li class="out">
+                          <div class="chat-img">
+                              <img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                          </div>
+                          <div class="chat-body">
+                              <div class="chat-message">
+                                  <h5> {{ direct.sender.first_name}} {{ direct.sender.last_name}}</h5> 
+                                  <p>{{ direct.body }}</p>
+                              </div>
+                          </div>
+                      </li>
+                    {% else %}
+                      <!-- left side -->
+                      <li class="in">
+                          <div class="chat-img">
+                              <img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                          </div>
+                          <div class="chat-body">
+                              <div class="chat-message">
+                                  <h5 class="name"> {{ direct.sender.first_name}} {{ direct.sender.last_name}} </h5>
+                                  <p>{{ direct.body }}.</p>
+                              </div>
+                          </div>
+                      </li>
+                      {% endif %}
+                      {% endfor %}
+                  </ul>
+                  
+                  <form role="form" method="POST">
+                    {% csrf_token %}
+                  <article class="media">
+                    <figure class="media-left">
+                    <div class="media-content">
+                      <input type="hidden" name="to_user" value="{{ active_direct }}">
+                      <div class="field">
+                        <p class="control">
+                          <textarea class="textarea"rows="4" cols="50" style="width: 100%;" required name="body" placeholder="Enter Your message"></textarea>
+                        </p>
+                      </div>
+                      <nav class="level">
+                        <div class="level-left">
+                          <div class="level-item">
+                            <button type="submit" name="action" class="button is-info">Send</buttom>
+                          </div>
+                        </div>
+                      </nav>
+                    </div>
+                  </article>
+                  </form>
+              </div>
+          </div>
       </div>
-      <hr> -->
-
-      <div class="content">
-        {% if message.unread %}
-        <p style="font-weight: bold; color: red;">
-          <i class="material-icons">mark_chat_unread</i> {{ message.unread }}
-        </p>
-        {% endif %}        
-      </div>
-
-    </div>
-  </article>
-</div>
-</a>
-{% endfor %}
-
-  </ul>
-  </aside>
-<br>
-<!-- <a href="{% url 'usersearch' %}" class="button is-success">New message</a> -->
-</div>
-<div class="column">
-<div>
-{% for direct in directs %}
-<div class="box">
-  <article class="media">
-    <div class="media-left">
-    </div>
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <!-- <h1>{{ direct.recipient.profile.username}}</h1> -->
-        </p>
-        <h1>{{ direct.sender.email}} -  {{ direct.body }}</h1>
-        <strong><small>{{ direct.date|date:'N d G:i'}}</small></strong>
-      </div>
-    </div>
-  </article>
-</div>
-{% endfor %}
-<!-- {% for other in others %}
-<div class="box">
-  <article class="media">
-    <div class="media-left">
-    </div>
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <h1>{{ other.recipient.profile.username}} {{ other.recipient.email }}</h1>
-         <strong><small>{{ direct.date|date:'N d G:i'}}</small></strong>
-        </p>
-        {{ other.body }}
-      </div>
-    </div>
-  </article>
-</div>
-{% endfor %} -->
-
-
-</div>
-
-
-<form role="form" method="POST">
-  {% csrf_token %}
-<article class="media">
-  <figure class="media-left">
-  <div class="media-content">
-    <input type="hidden" name="to_user" value="{{ active_direct }}">
-    <div class="field">
-      <p class="control">
-        <textarea class="textarea" required name="body" placeholder="Enter Your message"></textarea>
-      </p>
-    </div>
-    <nav class="level">
-      <div class="level-left">
-        <div class="level-item">
-          <button type="submit" name="action" class="button is-info">Send</buttom>
-        </div>
-      </div>
-    </nav>
   </div>
-</article>
-</form>
+</div>
 
-</div>
-</div>
 </body>
 </html>
