@@ -40,7 +40,10 @@
     </div>
     <div class="main-grid-container">
         <div id="video-container">
-            <div><video id="local-video" style="float:left ;" autoplay playsinline></video></div>
+            <div><video id="local-video" style="float:left ;" autoplay playsinline>
+                <!-- <input name="smname" id="smname" /> -->
+            
+            </video></div>
             <button id="btn-toggle-audio">Audio Mute</button>
             <button id="btn-toggle-video">Video Off</button>
             <div id="chat" style="float:right; top: 0%; margin-top: 0; background-color: black;  ">
@@ -58,6 +61,7 @@
             </div>
         </div>
     </div>
+    <h1>Value <input name="smname" id="smname" /></h1>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

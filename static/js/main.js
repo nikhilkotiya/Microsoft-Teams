@@ -1,6 +1,8 @@
 console.log("working");
 
-
+window.onbeforeunload = function() {
+    return "Are you sure?";
+ };
 var labelUsername=document.querySelector('#label-username');
 var usernameInput=document.querySelector('#username'); 
 var btnJoin=document.querySelector('#btn-join'); 
@@ -8,7 +10,6 @@ var count;
 var username;
 var mapPeers={};
 var webSocket;
-
 function webSocketOnMessage(event){
     var parsedData= JSON.parse(event.data);
     var peerUsername = parsedData['peer'];
@@ -47,32 +48,23 @@ btnJoin.addEventListener('click',() =>{
     usernameInput.value="";
     usernameInput.disabled=true;
     usernameInput.style.visibility= 'hidden';
-
     btnJoin.disabled=true;
     btnJoin.style.visibility='hidden';
-
     var labelUsername = document.querySelector('#label-username');
     labelUsername.innerHTML=username;
-    
     var loc =window.location;
     var wsStart='ws://';
-    
     if(loc.protocol=='https:'){
         wsStart= 'wss://';
     }
     var endPoint = wsStart +loc.host + loc.pathname;
- 
     console.log('endPoint:',endPoint);
-
     webSocket=new WebSocket(endPoint);  
-
     webSocket.addEventListener('open',(e)=> {
         console.log("open");
         sendSignal('new-peer',{});
     });      
     webSocket.addEventListener('message',webSocketOnMessage);
-
-
     webSocket.addEventListener('close',(e)=> {
         console.log("close")
     });
@@ -86,14 +78,9 @@ const constraints = {
     'video':true,
     'audio':true
 };
-
 const localVideo = document.querySelector('#local-video');
-
 const btnToggleAudio = document.querySelector('#btn-toggle-audio');
-
 const btnToggleVideo = document.querySelector('#btn-toggle-video');
-
-
 var userMedia=navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => {
         localStream=stream;
@@ -211,6 +198,8 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
     peer.addEventListener('datachannel',e =>{
         peer.dc=e.channel; 
         peer.dc.addEventListener('open',() =>{
+            console.log(peerUsername);
+            document.getElementById('smname').value = peerUsername;
             console.log("connection opend");
         });
         peer.dc.addEventListener('message',dcOnMessage);
@@ -285,6 +274,11 @@ function createVideo(peerUsername){
     return remoteVideo;
 
 }
+document.getElementById('smname').innerHTML = count();
+
+function count(peerUsername){
+    return ("my name is nikhil");    
+};
 
 function setOnTrack(peer,remoteVideo){
     var remoteStream = new MediaStream();

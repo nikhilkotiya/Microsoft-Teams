@@ -28,12 +28,11 @@
 <div class="box">
   <article class="media">
     <div class="media-content">
-
       <div class="content">
         <p>
-          User {{ message.user.profile.username}} 
+          User - {{ message.user.first_name}} {{message.user.last_name}}
           <br>
-           <small>{{ message.user.email }}</small>
+          Email-  <small>{{ message.user.email }}</small>
         </p>
       </div>
       <hr>
