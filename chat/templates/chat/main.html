@@ -22,6 +22,7 @@
             /* border-radius: 25%;
             background-color: black; */
             margin: 30px;
+            width: 100%;
         }
         .main-grid-container {
             display: flex;
@@ -40,12 +41,14 @@
     </div>
     <div class="main-grid-container">
         <div id="video-container">
-            <div><video id="local-video" style="float:left ;" autoplay playsinline>
+            <video id="local-video" style="float:left ;" autoplay playsinline>
                 <!-- <input name="smname" id="smname" /> -->
-            
-            </video></div>
+                <!-- <button style="z-index: 9999;width: 2000px; " id="btn-toggle-audio">Audio Mute</button> -->
+                <!-- <button style="z-index: 9999;width: 2000px; " id="btn-toggle-video">Video Off</button> -->
+            </video>
             <button id="btn-toggle-audio">Audio Mute</button>
             <button id="btn-toggle-video">Video Off</button>
+        </div>
             <div id="chat" style="float:right; top: 0%; margin-top: 0; background-color: black;  ">
                 <h3 style="color:white; justify-content: center;text-align: center; ">
                     CHAT 
@@ -63,5 +66,8 @@
     </div>
     <h1>Value <input name="smname" id="smname" /></h1>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script>
+        context.drawImage(video, x, y, width= 600 , height=400);
+    </script>
 </body>
 </html>

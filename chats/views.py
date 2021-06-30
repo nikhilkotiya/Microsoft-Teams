@@ -42,7 +42,7 @@ def UserSearch(request):
             users = User.objects.filter(Q(email__icontains=query))
 
             #Pagination
-            paginator = Paginator(users, 6)
+            paginator = Paginator(users, 20)
             page_number = request.GET.get('page')
             users_paginator = paginator.get_page(page_number)
 

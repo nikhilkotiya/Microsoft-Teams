@@ -35,20 +35,14 @@
           Email-  <small>{{ message.user.email }}</small>
         </p>
       </div>
-      <hr>
-
       <div class="content">
         {% if message.unread %}
+        <h1>unread</h1>
         <p style="font-weight: bold; color: red;">
           <i class="material-icons">mark_chat_unread</i> {{ message.unread }}
         </p>
         {% endif %}        
       </div>
-
-    </div>
-  </article>
-</div>
-</a>
 {% endfor %}
 
   </ul>
