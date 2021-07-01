@@ -140,3 +140,11 @@ RECAPTCHA_PRIVATE_KEY = "6LfNIlcbAAAAAAcecCz5uoDbN6kPgJal0dd6W2Fk"
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1",'teams121.herokuapp.com/ ,6379)],
+        },
+    },
+}
