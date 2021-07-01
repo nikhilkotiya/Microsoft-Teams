@@ -49,16 +49,16 @@ def index(request):
     elif request.POST.get("form_two"):
         email = request.POST.get('email')
         password = request.POST.get('password')
-        # captcha_token = request.POST.get("g-recaptcha-response")
-        # cap_url = "https://www.google.com/recaptcha/api/siteverify"
-        # cap_secret = "6LfNIlcbAAAAAAcecCz5uoDbN6kPgJal0dd6W2Fk"
-        # cap_data ={"secret":cap_secret,"response":captcha_token}
-        # cap_server_response = requests.post(url=cap_url,data=cap_data)
-        # print(cap_server_response.text)
-        # result = cap_server_response.json()
-        # if result['success']==False:
-        #     messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-        #     return render(request,"index.html")
+        captcha_token = request.POST.get("g-recaptcha-response")
+        cap_url = "https://www.google.com/recaptcha/api/siteverify"
+        cap_secret = "6LfNIlcbAAAAAAcecCz5uoDbN6kPgJal0dd6W2Fk"
+        cap_data ={"secret":cap_secret,"response":captcha_token}
+        cap_server_response = requests.post(url=cap_url,data=cap_data)
+        print(cap_server_response.text)
+        result = cap_server_response.json()
+        if result['success']==False:
+            messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+            return render(request,"index.html")
         user = authenticate(request,username=email, password=password)
         print(user)
         if user is not None:
