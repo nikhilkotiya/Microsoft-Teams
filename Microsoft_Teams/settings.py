@@ -124,11 +124,6 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = "accounts.User" 
 SITE_ID = 1
 ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
-}
 
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
