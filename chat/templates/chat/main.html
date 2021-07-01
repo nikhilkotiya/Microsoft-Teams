@@ -64,10 +64,29 @@
             </div>
         </div>
     </div>
-    <h1>Value <input name="smname" id="smname" /></h1>
+    <!-- <h1>Value <input name="smname" id="smname" /></h1> -->
+    <ul>
+        {% for user in users %}
+          <!-- NOTE: We escape HTML to prevent XSS attacks. -->
+          <li data-username="{{ user.username|escape }}">
+            {{ user.username|escape }}: {{ user.status|default:'Offline' }}
+          </li>
+        {% endfor %}
+      </ul>
+      <input type="text" value="127.0.0.1:8000/" id="myInput">
+      <button onclick="myFunction()">Copy text</button>
+      <a href="whatsapp://send?text=127.0.0.1:8000/" data-action="share/whatsapp/share">Share via Whatsapp</a>
+      <script>
+      function myFunction() {
+        /* Get the text field */
+        var copyText = document.getElementById("myInput");
+      
+        /* Select the text field */
+        copyText.select();
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+      }</script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <script>
-        context.drawImage(video, x, y, width= 600 , height=400);
-    </script>
+    <textarea name="stats-box" id="stats-box" cols="30" rows="10"></textarea>
 </body>
 </html>
