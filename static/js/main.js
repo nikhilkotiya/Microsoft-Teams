@@ -52,11 +52,12 @@ btnJoin.addEventListener('click',() =>{
     var labelUsername = document.querySelector('#label-username');
     labelUsername.innerHTML=username;
     var loc =window.location;
-    var wsStart='ws://';
-    if(loc.protocol=='https:'){
-        wsStart= 'wss://';
-    }
-    var endPoint = wsStart +loc.host + loc.pathname;
+    if (window.location.protocol == "https:") {
+        var wsStart = "wss://";
+      } else {
+        var wsStart = "ws://"
+      };
+    var endPoint = wsStart +location.host;
     console.log('endPoint:',endPoint);
     webSocket=new WebSocket(endPoint);  
     webSocket.addEventListener('open',(e)=> {
