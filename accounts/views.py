@@ -51,7 +51,7 @@ def index(request):
         password = request.POST.get('password')
         captcha_token = request.POST.get("g-recaptcha-response")
         cap_url = "https://www.google.com/recaptcha/api/siteverify"
-        cap_secret = "6LfNIlcbAAAAAAcecCz5uoDbN6kPgJal0dd6W2Fk"
+        cap_secret = "6LezmWsbAAAAAAxcSN9GhxQSKc0A9fjx_4v29uym"
         cap_data ={"secret":cap_secret,"response":captcha_token}
         cap_server_response = requests.post(url=cap_url,data=cap_data)
         print(cap_server_response.text)
