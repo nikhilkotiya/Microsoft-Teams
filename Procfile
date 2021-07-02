@@ -1,2 +1,2 @@
-web: daphne Microsoft_Teams.asgi:application --port $PORT --bind 0.0.0.0 -v2 
+web: gunicorn the_weather.wsgi
 worker: python manage.py runworker application -v2
