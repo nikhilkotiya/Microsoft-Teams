@@ -52,7 +52,7 @@ btnJoin.addEventListener('click',() =>{
     var labelUsername = document.querySelector('#label-username');
     labelUsername.innerHTML=username;
     var loc =window.location;
-    var wsStart='wss://teams121.herokuapp.com/';
+    var wsStart='wss://';
     if(loc.protocol=='https:'){
         wsStart= 'wss://';
     }
