@@ -143,5 +143,3 @@ CHANNEL_LAYERS = {
         },
     },
 }
-# DJANGO_SETTINGS_MODULE = Mic_settings
-# set DJANGO_SETTINGS_MODULE='Microsoft_Teams.settings'
