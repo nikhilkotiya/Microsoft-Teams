@@ -1,2 +1,2 @@
-web: gunicorn Microsoft_Teams.wsgi
+web: gunicorn Microsoft_Teams.asgi
 worker: python manage.py runworker application -v2
