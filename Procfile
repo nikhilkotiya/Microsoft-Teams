@@ -1,1 +1,1 @@
-web: waitress-serve --port=8000 Microsoft_Teams.asgi:application
+web: waitress-serve --port=$PORT Microsoft_Teams.asgi:application
