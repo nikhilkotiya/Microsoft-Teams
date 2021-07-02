@@ -143,3 +143,4 @@ CHANNEL_LAYERS = {
         },
     },
 }
+os.environ['DJANGO_SETTINGS_MODULE']='Microsoft_Teams.settings'
