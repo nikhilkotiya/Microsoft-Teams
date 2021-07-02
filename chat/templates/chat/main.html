@@ -22,7 +22,6 @@
             /* border-radius: 25%;
             background-color: black; */
             margin: 30px;
-            width: 100%;
         }
         .main-grid-container {
             display: flex;
@@ -41,14 +40,12 @@
     </div>
     <div class="main-grid-container">
         <div id="video-container">
-            <video id="local-video" style="float:left ;" autoplay playsinline>
+            <div><video id="local-video" style="float:left ;" autoplay playsinline>
                 <!-- <input name="smname" id="smname" /> -->
-                <!-- <button style="z-index: 9999;width: 2000px; " id="btn-toggle-audio">Audio Mute</button> -->
-                <!-- <button style="z-index: 9999;width: 2000px; " id="btn-toggle-video">Video Off</button> -->
-            </video>
+            
+            </video></div>
             <button id="btn-toggle-audio">Audio Mute</button>
             <button id="btn-toggle-video">Video Off</button>
-        </div>
             <div id="chat" style="float:right; top: 0%; margin-top: 0; background-color: black;  ">
                 <h3 style="color:white; justify-content: center;text-align: center; ">
                     CHAT 
@@ -64,29 +61,6 @@
             </div>
         </div>
     </div>
-    <!-- <h1>Value <input name="smname" id="smname" /></h1> -->
-    <ul>
-        {% for user in users %}
-          <!-- NOTE: We escape HTML to prevent XSS attacks. -->
-          <li data-username="{{ user.username|escape }}">
-            {{ user.username|escape }}: {{ user.status|default:'Offline' }}
-          </li>
-        {% endfor %}
-      </ul>
-      <input type="text" value="127.0.0.1:8000/" id="myInput">
-      <button onclick="myFunction()">Copy text</button>
-      <a href="whatsapp://send?text=127.0.0.1:8000/" data-action="share/whatsapp/share">Share via Whatsapp</a>
-      <script>
-      function myFunction() {
-        /* Get the text field */
-        var copyText = document.getElementById("myInput");
-      
-        /* Select the text field */
-        copyText.select();
-        /* Copy the text inside the text field */
-        document.execCommand("copy");
-      }</script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <textarea name="stats-box" id="stats-box" cols="30" rows="10"></textarea>
 </body>
 </html>
