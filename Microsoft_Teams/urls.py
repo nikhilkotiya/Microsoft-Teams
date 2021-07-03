@@ -12,5 +12,5 @@ urlpatterns = [
     # path('feed/',include('blog.urls')),
     path('',include('chat.urls')),
     # path('blogapi/',include('blogapi.urls')), 
-    path('private/',include('chats.urls')),
+    # path('private/',include('chats.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

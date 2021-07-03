@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'channels',
     'captcha',
     'chat',
-    'chats',
+    # 'chats',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -126,13 +126,35 @@ SITE_ID = 1
 ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
 
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("*", 8000)],
+#         },
+#     },
+# }
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 8000)],
+#             "on_disconnect": "redis.disconnect",
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": ["127.0.0.1"],
+            "symmetric_encryption_keys": [SECRET_KEY],
+        },
+    },
 }
-
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
