@@ -130,10 +130,32 @@ ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
 #     "default": {
 #         "BACKEND": "channels_redis.core.RedisChannelLayer",
 #         "CONFIG": {
-#             "hosts": [("*", 8000)],
+#             "hosts": [("127.0.0.1", 6379)],
 #         },
 #     },
 # }
+# import re
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("localhost", 6379)],
+#             "channel_capacity": {
+#                 "http.request": 200,
+#                 "http.response!*": 10,
+#                 re.compile(r"^websocket.send\!.+"): 20,
+#             },
+#         },
+#     },
+# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # CHANNEL_LAYERS = {
 #     "default": {
@@ -145,15 +167,15 @@ ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
 #     },
 # }
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": ["127.0.0.1"],
-            "symmetric_encryption_keys": [SECRET_KEY],
-        },
-    },
-}
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": ["127.0.0.1"],
+#             "symmetric_encryption_keys": [SECRET_KEY],
+#         },
+#     },
+# }
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
