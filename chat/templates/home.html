@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Sending Email in Django</title>
+  </head>
+  <body class="bg-dark text-light">
+    <div class="container my-3" style="width: 500px;">
+
+      <h2 class="alert alert-success">Sending Email in Django</h2>
+      <hr>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-dark alert-dismissible fade show my-4" role="alert">
+      {{message}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+      {% endfor %}
+      {% endif %}
+
+
+    <form action="{% url 'send_mail' %}" method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"><b>To</label>
+        <input type="email" class="form-control" name="receiver" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="subject" class="form-label"><b>Subject</label>
+        <input type="text" class="form-control" name="sub" id="subject">
+      </div>
+      <div class="mb-3">
+        <label for="content" class="form-label">Body</label>
+        <textarea class="form-control" name="content" style="height: 250px;"></textarea>
+
+      </div>
+
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+
+
+    </div>
+
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
