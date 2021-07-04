@@ -110,15 +110,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
@@ -126,8 +123,6 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = "accounts.User" 
 SITE_ID = 1
 ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
-
-
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
@@ -137,16 +132,22 @@ RECAPTCHA_PRIVATE_KEY = "6LezmWsbAAAAAAxcSN9GhxQSKc0A9fjx_4v29uym"
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
 }
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())
 # heroku config:set DJANGO_SETTINGS_MODULE=Microsoft_Teams.settings --account teams121
 # web: daphne Microsoft_Teams.asgi:application --port $PORT --bind 0.0.0.0 -v2
 # worker: python manage.py runworker channel_layer -v2
