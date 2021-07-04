@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'users',
     'accounts',
+    'django.contrib.sites',
     # "chat_box",
     'django_filters',
     'channels',
@@ -69,7 +70,7 @@ WSGI_APPLICATION = 'Microsoft_Teams.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'NAME': (BASE_DIR / 'db.sqlite3'),
     }
 }
 

@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('',include('test_api.urls')),
     path('', include('accounts.urls')),
-    path('accounts/',include('allauth.urls')),
+    # path('accounts/',include('allauth.urls')),
     # path('feed/',include('blog.urls')),
     path('',include('chat.urls')),
     # path('blogapi/',include('blogapi.urls')), 
