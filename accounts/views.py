@@ -60,9 +60,9 @@ def index(request):
         print(cap_server_response.text)
 
         result = cap_server_response.json()
-        if result['success']==False:
-            messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-            return render(request,"index.html")
+        # if result['success']==False:
+        #     messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+        #     return render(request,"index.html")
         user = authenticate(request,username=email, password=password)
         if user is not None:
             login(request, user)

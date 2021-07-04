@@ -1,5 +1,12 @@
 console.log("working");
-
+function createMenuItem(name) {
+    let li = document.createElement('li');
+    li.textContent = name;
+    return li;
+}
+// get the ul#menu
+const menu = document.querySelector('#menu');
+// add menu item
 window.onbeforeunload = function() {
     return "Are you sure?";
  };
@@ -151,7 +158,7 @@ function createOfferer(peerUsername,receiver_channel_name){
         // It is used to import collect.js library
     });
     dc.addEventListener('message',dcOnMessage);
-
+    menu.appendChild(createMenuItem(peerUsername));
     var remoteVideo= createVideo(peerUsername);
     setOnTrack(peer,remoteVideo);
     mapPeers[peerUsername]=[peer,dc];
@@ -194,7 +201,7 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
 
     var remoteVideo= createVideo(peerUsername);
     setOnTrack(peer,remoteVideo);
-
+    menu.appendChild(createMenuItem(peerUsername));
     peer.addEventListener('datachannel',e =>{
         peer.dc=e.channel; 
         peer.dc.addEventListener('open',() =>{
