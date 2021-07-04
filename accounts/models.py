@@ -11,7 +11,6 @@ is_active = (
 class User(AbstractUser):
     username= models.CharField(unique=False,null=True,blank=True,max_length=20)
     email = models.EmailField(unique = True, verbose_name='email')
-    is_email_verified = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = MyAccountManager()
