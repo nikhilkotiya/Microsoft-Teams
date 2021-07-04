@@ -17,34 +17,6 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 def userdashboard(request):
     return render(request,'2ndtemp.html')
-def send_action_email(user,request):
-    current_site = get_current_site(request)
-    email_subject = 'Activate your account'
-    email_body = render_to_string('activate.html',{
-        'user':user,
-        'domain':current_site,
-        'uid':urlsafe_base64_encode(force_bytes(user.pk )),
-        'token': generator_token.make_token(user)
-    })
-    email=EmailMessage(subject=email_subject,body=email_body,
-                from_email = settings.EMAIL_FROM_USER,
-                to = [user.email]
-                )
-    email.send() 
-def activate_user(request,uidb64,token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except Exception as e:
-        user = None
-    if user and generator_token.check_token(user,token):
-        user.is_email_verified = True
-        user.save()
-        messages.add_message(request,messages.SUCCESS,'Email Varified, Now you can login')
-        return redirect(reversed('login'))
-
-    return render(request,'activate-failed.html',{"user":user})
-
 def index(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -62,7 +34,6 @@ def index(request):
                     data.email = request.POST["email"]
                     print(data.email)
                     data.save()
-                    send_action_email(data,request)
                     print("user saved")
                     messages.success(request, 'Account crated succesfully.')
                     return render(request,"index.html")
@@ -112,24 +83,3 @@ def ulogout(request):
 
 def about(request):
     return  HttpResponse("About page")
-def send_email_to_user(otp,email):
-    import smtplib
-    con = smtplib.SMTP("smtp.gmail.com",587)
-    con.ehlo()
-    con.starttls()
-    admin_email = "email"
-    admin_password = "password"
-    con.login(admin_email,admin_password)
-    msg = "Otp is "+str(otp)
-    con.sendmail("email",email,"Subject:Password Reset \n\n"+msg)
-
-def send_warning_email(email):
-    import smtplib
-    con = smtplib.SMTP("smtp.gmail.com",587)
-    con.ehlo()
-    con.starttls()
-    admin_email = "your email"
-    admin_password = "your password"
-    con.login(admin_email,admin_password)
-    msg = "Some One is Trying To Login With Your Account !!"
-    con.sendmail(admin_email,email,"Subject:Login Warning \n\n"+msg)
