@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +21,6 @@
             /* border-radius: 25%;
             background-color: black; */
             margin: 30px;
-            width: 100%;
         }
         .main-grid-container {
             display: flex;
@@ -30,46 +28,43 @@
 }
     </style>
 </head>
-
-<body >
-    <input type="hidden" name="smname" id="smname" />
-    <a href="/home"><button>Go Home</button></a>
-    <h3 id="label-username" type="hidden"></h3>
-    <div>
-        <input id="username" type="hidden"  value="{{request.user.email}}">
-        <button id="btn-join"> Join Room </button>
-    </div>
-    <ul id="menu">
-        text
-    </ul>
-    <div class="main-grid-container">
-        <div id="video-container">
-            <video id="local-video" style="float:left ;" autoplay playsinline>
-                <!-- <input name="smname" id="smname" /> -->
-                <!-- <button style="z-index: 9999;width: 2000px; " id="btn-toggle-audio">Audio Mute</button> -->
-                <!-- <button style="z-index: 9999;width: 2000px; " id="btn-toggle-video">Video Off</button> -->
-            </video>
-            <button id="btn-toggle-audio">Audio Mute</button>
-            <button id="btn-toggle-video">Video Off</button>
+<body style="background-color: rgb(10, 0, 0);" >
+    <div style="background-color: rgb(73, 72, 72);position: relative;top:0px;">
+        <input type="hidden" name="smname" id="smname" />
+        <div style="position:absolute;right:0px"><a href="/home"><button style="padding: 8px 25px ;border-radius: 40px;margin: 6px;">Go Home</button></a></div>
+        <div>
+        <button id="btn-join" style="padding: 8px 25px ;border-radius: 40px;margin: 6px;"> Join Room </button>
         </div>
-            <div id="chat" style="float:right; top: 0%; margin-top: 0; background-color: black;  ">
-                <h3 style="color:white; justify-content: center;text-align: center; ">
-                    CHAT 
-                </h3>
+     <div class="main-grid-container" style="background-color: black;">
+        <div id="video-container" style="display:flex;flex-wrap:wrap;justify-content: space-evenly;">
+            <div style="margin: 9px 0px 7px 0px;">
+                <video id="local-video" style="float:left ;width:min-content ;height:60vh;width:45vw;background-color: rgb(17, 16, 16);margin-top: 24px;" autoplay playsinline>
+                
+                </video>
+                <div style="display: flexbox;justify-content: center; text-align: center;background-color: rgb(247, 243, 243);">   
+                    <div>
+                        <h3 id="label-username" type="hidden"></h3>
+                        <input id="username" type="hidden"  value="{{request.user.email}}">
+                    </div>
+                    <button id="btn-toggle-audio" style="border-radius: 60px;margin-bottom: 8px;">Audio Mute</button>
+                    <button id="btn-toggle-video" style="border-radius: 50px;margin-bottom: 8px;">Video Off</button>
+                </div>
+            </div>
+                    <div id="chat" style="float:right;position:fixed;width: 21.5vw; bottom: 1%;right:0.3%; margin-top: 0;border: 4px solid rgb(52, 52, 53); background-color: rgb(102, 101, 101);  ">
+                <h2 style="color:white; justify-content: center;text-align: center; ">
+                                    </h2>
                 <hr style="color:white;">
                 <div id="messages">
-    
-                    <ul id="message-list" style="color:white; max-width:200px; word-wrap:break-word;"></ul>
+                                            <ul id="message-list" style="color:white; min-width:200px; word-wrap:break-word;"></ul>
+                                            <ul id="menu">User Online</ul>
                 </div>
                 <div>
-                    <input id="msg" required><button required id="btn-send-msg">Send Messages</button>
+                    <input id="msg" style="border: 3px solid rgba(107, 70, 70, 0.925);" required><button required id="btn-send-msg">Send Messages</button>
                 </div>
             </div>
         </div>
+        </div>
     </div>
-    <h1>Value <input name="smname" id="smname" /></h1>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <script>
-    </script>
 </body>
 </html>

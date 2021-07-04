@@ -148,23 +148,23 @@ ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
 #         },
 #     },
 # }
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [(".pythonanywhere.com", 6379)],
-        },  
-    },
-}
-CACHES = {
-    "default": {
-        "BACKEND": "redis_cache.cache.RedisCache",
-        "LOCATION": ".pythonanywhere.com:6379:1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "redis_cache.client.DefaultClient",
-        }
-    }
-}
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [(".pythonanywhere.com", 6379)],
+#         },  
+#     },
+# }
+# CACHES = {
+#     "default": {
+#         "BACKEND": "redis_cache.cache.RedisCache",
+#         "LOCATION": ".pythonanywhere.com:6379:1",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "redis_cache.client.DefaultClient",
+#         }
+#     }
+# }
 
 # CHANNEL_LAYERS = {
 #     "default": {
@@ -175,7 +175,11 @@ CACHES = {
 #         },
 #     },
 # }
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 # CHANNEL_LAYERS = {
 #     "default": {
 #         "BACKEND": "channels_redis.core.RedisChannelLayer",
