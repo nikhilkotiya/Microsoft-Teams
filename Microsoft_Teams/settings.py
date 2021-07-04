@@ -69,7 +69,7 @@ WSGI_APPLICATION = 'Microsoft_Teams.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'mydatabase',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -113,8 +113,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static")
-
 ]
+STATIC_ROOT= os.path.join(BASE_DIR,"staticfiles")
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
@@ -175,11 +175,11 @@ ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
 #         },
 #     },
 # }
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
-}
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#     }
+# }
 # CHANNEL_LAYERS = {
 #     "default": {
 #         "BACKEND": "channels_redis.core.RedisChannelLayer",
