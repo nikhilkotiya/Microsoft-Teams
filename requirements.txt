@@ -34,7 +34,6 @@ docker==5.0.0
 docker-compose==1.29.2
 dockerpty==0.4.1
 docopt==0.6.2
-gunicorn==20.1.0
 hiredis==2.0.0
 hyperlink==21.0.0
 idna==2.10
@@ -63,7 +62,6 @@ python-dateutil==2.8.1
 python-dotenv==0.18.0
 python3-openid==3.2.0
 pytz==2021.1
-pywin32==227
 PyYAML==5.4.1
 redis==3.5.3
 requests==2.25.1
@@ -75,10 +73,8 @@ sqlparse==0.4.1
 texttable==1.6.3
 toml==0.10.2
 Twisted==21.2.0
-twisted-iocpsupport==1.0.1
 txaio==21.2.1
 urllib3==1.26.6
-waitress==2.0.0
 websocket-client==0.59.0
 whitenoise==5.2.0
 windows-curses==2.2.0
