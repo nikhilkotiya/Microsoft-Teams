@@ -83,7 +83,7 @@ def index(request):
         password = request.POST.get('password')
         captcha_token = request.POST.get("g-recaptcha-response")
         cap_url = "https://www.google.com/recaptcha/api/siteverify"
-        cap_secret = "6LfNIlcbAAAAAAcecCz5uoDbN6kPgJal0dd6W2Fk"
+        cap_secret ="6LezmWsbAAAAAAxcSN9GhxQSKc0A9fjx_4v29uym"
         cap_data ={"secret":cap_secret,"response":captcha_token}
         cap_server_response = requests.post(url=cap_url,data=cap_data)
         print(cap_server_response.text)
@@ -93,11 +93,6 @@ def index(request):
             messages.error(request, 'Invalid reCAPTCHA. Please try again.')
             return render(request,"index.html")
         user = authenticate(request,username=email, password=password)
-
-        if not user.is_email_verified:
-            messages.error(request, 'Email is not verified')
-            return render(request,"index.html")
-        print(user)
         if user is not None:
             login(request, user)
             print('welcome')

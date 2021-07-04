@@ -1,0 +1,35 @@
+version :"3.8"
+services:
+    django:
+        build:
+            container_name:django
+            commnad:python manage.py runserver 0.0.0.0:8000
+            volumes:
+                .:/usr/src/Microsoft_Teams 
+            ports:
+                - "8000:8000"
+            environmenet":
+                - DEBUG=1
+                - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1
+                - CELERY_BROKER=redis://redis:6379/0/
+                - CELERY_BACKEND=redis://redis:6379/0/
+            depends_on:
+                - sqlbd
+                - redis 
+
+        celery:
+            build: .
+            command: celery worker --Microsoft_Teams = chat --loglevel=info
+            volumes:
+                - .:/usr/src/app
+
+            depends_on:
+                - django
+                - redis
+        sqldb:
+            container_name: sqldb
+        redis:
+            image: "redis:apline"
+    volumes:
+        pgdata:
+                        

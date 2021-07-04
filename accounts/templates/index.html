@@ -44,14 +44,9 @@
               <input type="password" name="password" placeholder="Password" required>
             </div>
             {{invalid}}
-            <div class="g-recaptcha" data-sitekey="6LfNIlcbAAAAAAU4TEruOcQdvsbuZDhE5CPnGz4W"></div>
+            <div class="g-recaptcha" data-sitekey="6LezmWsbAAAAALIIDR3YKnGsE4CNO22b93JS01YP"></div>
             <input type="submit" name = "form_two"  value="Login" class="btn solid" >
-            <p class="social-text">Or Sign in with social platforms</p>
-            <div class="social-media">
-              <a href="{% provider_login_url 'google' %}?next={% url 'home' %}" class="social-icon">
-                <i class="fab fa-google"></i>
-              </a>
-            </div>
+            <p class="social-text"></p>
           </form>
           <form class="sign-up-form" method="POST">
               {% csrf_token %}
@@ -84,13 +79,7 @@
               </div>
               {{errorPC}}
             <input type="submit" class="btn" name= "form_one" value="Sign up" />
-            <p class="social-text">Or Sign up with social platforms</p>
-            <div class="social-media">
-              <a href="#" class="social-icon">
-                <i class="fab fa-google"></i>
-              </a>
-
-            </div>
+            <p class="social-text"></p>
           </form>
         </div>
       </div>
