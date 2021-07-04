@@ -126,14 +126,14 @@ SITE_ID = 1
 ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
 
 
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("127.0.0.1", 6379)],
-#         },
-#     },
-# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+    },
+}
 # import re
 # CHANNEL_LAYERS = {
 #     "default": {
@@ -210,3 +210,6 @@ RECAPTCHA_REQUIRED_SCORE = 0.85
 
 CELERY_BROKER_URL= os.environ.get("CELERY_BROKER","redis://:redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER","redis://redis:6379/0")
+
+import django_heroku
+django_heroku.settings(locals())
