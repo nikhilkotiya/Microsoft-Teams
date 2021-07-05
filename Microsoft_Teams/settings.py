@@ -125,88 +125,20 @@ SITE_ID = 1
 
 ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("127.0.0.1", 6379)],
-#         },
-#     },
-# }
-# import re
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("localhost", 6379)],
-#             "channel_capacity": {
-#                 "http.request": 200,
-#                 "http.response!*": 10,
-#                 re.compile(r"^websocket.send\!.+"): 20,
-#             },
-#         },
-#     },
-# }
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [(".pythonanywhere.com", 6379)],
-#         },  
-#     },
-# }
-# CACHES = {
-#     "default": {
-#         "BACKEND": "redis_cache.cache.RedisCache",
-#         "LOCATION": ".pythonanywhere.com:6379:1",
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "redis_cache.client.DefaultClient",
-#         }
-#     }
-# }
-
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("127.0.0.1", 8000)],
-#             "on_disconnect": "redis.disconnect",
-#         },
-#     },
-# }
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels.layers.InMemoryChannelLayer"
-#     }
-# }
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": ["127.0.0.1"],
-#             "symmetric_encryption_keys": [SECRET_KEY],
-#         },
-#     },
-# }
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
-
-EMAIL_FROM_USER= 'example@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'gagankotiya@gmail.com'
+EMAIL_HOST_PASSWORD = 'agnoscom@47'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'example@gmail.com'
-EMAIL_HOST_PASSWORD = 'password'
-EMAIL_BACKEND = (
-        "django.core.mail.backends.smtp.EmailBackend"
-    )
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 RECAPTCHA_PUBLIC_KEY = "6LfNIlcbAAAAAAU4TEruOcQdvsbuZDhE5CPnGz4W"
 RECAPTCHA_PRIVATE_KEY = "6LfNIlcbAAAAAAcecCz5uoDbN6kPgJal0dd6W2Fk"
 RECAPTCHA_REQUIRED_SCORE = 0.85
-
 CELERY_BROKER_URL= os.environ.get("CELERY_BROKER","redis://:redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER","redis://redis:6379/0")
