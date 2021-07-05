@@ -45,7 +45,13 @@
             </div>
             {{invalid}}
             <div class="g-recaptcha" data-sitekey="6LezmWsbAAAAALIIDR3YKnGsE4CNO22b93JS01YP"></div>
-            <input type="submit" name = "form_two"  value="Login" class="btn solid" >
+            <input type="submit" name = "form_two"  value="Login" class="btn solid">
+                        <p class="social-text">Or Sign in with social platforms</p>
+            <div class="social-media">
+              <a href="{% provider_login_url 'google' %}?next={% url 'home' %}" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+            </div>
             <p class="social-text"></p>
           </form>
           <form class="sign-up-form" method="POST">
@@ -79,6 +85,13 @@
               </div>
               {{errorPC}}
             <input type="submit" class="btn" name= "form_one" value="Sign up" />
+            <p class="social-text">Or Sign up with social platforms</p>
+            <div class="social-media">
+               <a href="{% provider_login_url 'google' %}?next={% url 'home' %}" class="social-icon">
+                <i class="fab fa-google"></i>
+              </a>
+
+            </div>
             <p class="social-text"></p>
           </form>
         </div>
@@ -107,7 +120,7 @@
             </p>
             <button class="btn transparent" id="sign-in-btn">
               Sign in
-            </button>
+            </button>    
           </div>
           <img src="{% static 'img/register.svg' %}" class="image" alt=" not found" />
         </div>

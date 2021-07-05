@@ -38,8 +38,8 @@
      <div class="main-grid-container" style="background-color: black;">
         <div id="video-container" style="display:flex;flex-wrap:wrap;justify-content: space-evenly;">
             <div style="margin: 9px 0px 7px 0px;">
-                <video  autoplay playsinline>
-
+                <video id="local-video" style="float:left ;width:min-content ;height:60vh;width:45vw;background-color: rgb(17, 16, 16);margin-top: 24px;" autoplay playsinline>
+                
                 </video>
                 <div style="display: flexbox;justify-content: center; text-align: center;background-color: rgb(247, 243, 243);">   
                     <div>
@@ -56,6 +56,7 @@
                 <hr style="color:white;">
                 <div id="messages">
                                             <ul id="message-list" style="color:white; min-width:200px; word-wrap:break-word;"></ul>
+                                            <ul id="menu">User Online</ul>
                 </div>
                 <div>
                     <input id="msg" style="border: 3px solid rgba(107, 70, 70, 0.925);" required><button required id="btn-send-msg">Send Messages</button>
@@ -63,6 +64,8 @@
             </div>
         </div>
         </div>
+
+  </div>
     </div>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>

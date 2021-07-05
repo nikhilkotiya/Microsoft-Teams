@@ -8,5 +8,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('',include('chat.urls')),
+    path('accounts/',include('allauth.urls')),
     path('private/',include('app1.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

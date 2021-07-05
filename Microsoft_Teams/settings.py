@@ -142,22 +142,8 @@ RECAPTCHA_PRIVATE_KEY = "6LezmWsbAAAAAAxcSN9GhxQSKc0A9fjx_4v29uym"
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("127.0.0.1", 6379)],
-#         },
-#     },
-# }
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
     }
 }
-import django_heroku
-django_heroku.settings(locals())
-# heroku config:set DJANGO_SETTINGS_MODULE=Microsoft_Teams.settings --account teams121
-# web: daphne Microsoft_Teams.asgi:application --port $PORT --bind 0.0.0.0 -v2
-# worker: python manage.py runworker channel_layer -v2
-# heroku ps:scale worker=1:free -a teams121

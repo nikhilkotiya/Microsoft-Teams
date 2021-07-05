@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transcriber</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+    .gradient-background {
+  height: 600px;
+   background: linear-gradient(62deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+     animation: gradient 15s ease infinite;
+      background-size: 400% 400%;
+
+}
+@-webkit-keyframes gradient{
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+     background-position: 0% 50%;
+  }
+}
+@keyframes gradient{
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+     background-position: 0% 50%;
+  }
+}
+    </style>
+</head>
+<body style="background-color:black;color:white;font:20px;">
+<div id="speechContainer">
+    <h1>Upload new File</h1>
+    <form method="post" enctype="multipart/form-data"/>
+        <input type="file" name="file"/>
+        <br>
+        <input type="submit" value="Transcribe"/>
+
+    </form>
+    {%if transcript != "" %}
+    <div id="speechTranscriptContainer">
+        <h1>Transcribed Audio Text</h1>
+        <p>{{transcript}}</p>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>

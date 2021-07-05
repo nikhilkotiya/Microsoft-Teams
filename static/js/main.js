@@ -1,11 +1,19 @@
 console.log("working");
-
+function createMenuItem(name) {
+    let li = document.createElement('li');
+    li.textContent = name;
+    return li;
+}
+// get the ul#menu
+const menu = document.querySelector('#menu');
+// add menu item
 window.onbeforeunload = function() {
     return "Are you sure?";
  };
 var labelUsername=document.querySelector('#label-username');
 var usernameInput=document.querySelector('#username'); 
 var btnJoin=document.querySelector('#btn-join'); 
+var count;
 var username;
 var mapPeers={};
 var webSocket;
@@ -52,7 +60,7 @@ btnJoin.addEventListener('click',() =>{
     var labelUsername = document.querySelector('#label-username');
     labelUsername.innerHTML=username;
     var loc =window.location;
-    var wsStart='wss://';
+    var wsStart='ws://';
     if(loc.protocol=='https:'){
         wsStart= 'wss://';
     }
@@ -150,7 +158,7 @@ function createOfferer(peerUsername,receiver_channel_name){
         // It is used to import collect.js library
     });
     dc.addEventListener('message',dcOnMessage);
-
+    menu.appendChild(createMenuItem(peerUsername));
     var remoteVideo= createVideo(peerUsername);
     setOnTrack(peer,remoteVideo);
     mapPeers[peerUsername]=[peer,dc];
@@ -175,9 +183,7 @@ function createOfferer(peerUsername,receiver_channel_name){
         sendSignal('new-offer',{
                 'sdp' : peer.localDescription,
                 'receiver_channel_name' : receiver_channel_name
-
         });
-
     });
 
     peer.createOffer()
@@ -195,7 +201,7 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
 
     var remoteVideo= createVideo(peerUsername);
     setOnTrack(peer,remoteVideo);
-
+    menu.appendChild(createMenuItem(peerUsername));
     peer.addEventListener('datachannel',e =>{
         peer.dc=e.channel; 
         peer.dc.addEventListener('open',() =>{
@@ -230,23 +236,6 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
                 'receiver_channel_name':receiver_channel_name
         });
     });
-
-
-    function user(peerUsername){
-        console.log("Online users")
-        var list = $('.onlinepeers')
-        list.empty()
-        if(peerUsername.length == 0) {
-            var usr = '<li>Looks like no one is online</li>'
-            list.append(usr);
-            return
-        }
-        for (var i = 0; i < peerUsername.length; i++) {
-            var usr = '<li class="peeruser">'+ peerUsername[i] + '</li>'
-            console.log(usr)
-            list.append(usr);
-        }
-    }
     peer.setRemoteDescription(offer)
         .then(() =>{
             console.log("remote description set ssuccefully for %s",peerUsername);
@@ -292,8 +281,11 @@ function createVideo(peerUsername){
     return remoteVideo;
 
 }
+document.getElementById('smname').innerHTML = count();
 
-
+function count(peerUsername){
+    return ("my name is nikhil");    
+};
 
 function setOnTrack(peer,remoteVideo){
     var remoteStream = new MediaStream();
@@ -320,5 +312,3 @@ function getDataChannels(){
     }
     return datachannels;
 }
-// var promise = RTCPeerConnection.getStats(peer);
-// console.log(promise)
