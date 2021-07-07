@@ -1,98 +1,137 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .video-grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            background-color: black;
-        }
-        .main-grid-container {
-            display: grid;
-            grid-template-columns: 60% 20%;
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'main.css' %}">
 
-        video {
-            /* border-radius: 25%;
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+
+  <style>
+    .video-grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background-color: black;
+    }
+
+    .main-grid-container {
+      display: grid;
+      grid-template-columns: 60% 20%;
+    }
+
+    video {
+      /* border-radius: 25%;
             background-color: black; */
-            margin: 30px;
-        }
-        .main-grid-container {
-            display: flex;
-            flex-direction: column;
-}
-    </style>
-</head>
-<body style="background-color: rgb(10, 0, 0);" >
-    <div style="background-color: rgb(73, 72, 72);position: relative;top:0px;">
-        <input type="hidden" name="smname" id="smname" />
-        <div style="position:absolute;right:0px"><a href="/home"><button style="padding: 8px 25px ;border-radius: 40px;margin: 6px;">Go Home</button></a></div>
-        <div>
-        <button id="btn-join" style="padding: 8px 25px ;border-radius: 40px;margin: 6px;"> Join Room </button>
-        </div>
-     <div class="main-grid-container" style="background-color: black;">
-        <div id="video-container" style="display:flex;flex-wrap:wrap;justify-content: space-evenly;">
-            <div style="margin: 9px 0px 7px 0px;">
-                <video id="local-video" style="float:left ;width:min-content ;height:60vh;width:45vw;background-color: rgb(17, 16, 16);margin-top: 24px;" autoplay playsinline>
-                
-                </video>
-                <div style="display: flexbox;justify-content: center; text-align: center;background-color: rgb(247, 243, 243);">   
-                    <div>
-                        <h3 id="label-username" type="hidden"></h3>
-                        <input id="username" type="hidden"  value="{{request.user.email}}">
-                    </div>
-                    <button id="btn-toggle-audio" style="border-radius: 60px;margin-bottom: 8px;">Audio Mute</button>
-                    <button id="btn-toggle-video" style="border-radius: 50px;margin-bottom: 8px;">Video Off</button>
-                </div>
-            </div>
-                    <div id="chat" style="float:right;position:fixed;width: 21.5vw; bottom: 1%;right:0.3%; margin-top: 0;border: 4px solid rgb(52, 52, 53); background-color: rgb(102, 101, 101);  ">
-                <h2 style="color:white; justify-content: center;text-align: center; ">
-                                    </h2>
-                <hr style="color:white;">
-                <div id="messages">
-                                            <ul id="message-list" style="color:white; min-width:200px; word-wrap:break-word;"></ul>
-                                            <ul id="menu">User Online</ul>
-                </div>
-                <div>
-                    <input id="msg" style="border: 3px solid rgba(107, 70, 70, 0.925);" required><button required id="btn-send-msg">Send Messages</button>
-                </div>
-            </div>
-        </div>
-        </div>
-        <div class="container">
+      margin: 100px;
+    }
 
-            <h1>Voice Controlled Notes App</h1>
-            <p class="page-description">A tiny app that allows you to take notes by recording your voice</p>
-        
-            <div class="app">
-        
-              <div class="input-single">
-                <textarea id="note-textarea" placeholder="Create a new note by typing or using voice recognition." rows="6"></textarea>
-              </div>
-              <button id="start-record-btn" title="Start Recording">Start Recognition</button>
-              <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
-              <button id="save-note-btn" title="Save Note">Save Note</button>
-              <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
-        
-              <h3>My Notes</h3>
-              <ul id="notes">
-                <li>
-                  <p class="no-notes">You don't have any notes.</p>
-                </li>
-              </ul>
-        
-            </div>
-        
-          </div>
-  </div>
+    .main-grid-container {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="head2" style="background-color: rgb(73, 72, 72);position: relative;top:0px;">
+
+    <input type="hidden" name="smname" id="smname" />
+    <div style="position:absolute;right:0px"><a href="/home"><button style="padding: 8px 25px ;border-radius: 40px;margin: 6px;">Go Home</button></a></div>
+    <div>
+      <button id="btn-join" style="padding: 8px 25px ;border-radius: 40px;margin: 6px ;"> Join Room </button>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <div class="share-button">
+      <span><i class="fas fa-share-alt"> Share</i></span>
+      <a href="whatsapp://send?text=You're invited to a Teams meeting!- http://127.0.0.1:8000/" data-action="share/whatsapp/share"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:someone@something.com?subject=Teams meeting &body=You're invited to a Teams meeting!- http://127.0.0.1:8000/"><i class="fas fa-envelope"></i></a>
+    </div>
+    <div class="main-grid-container" style="background-color: black;">
+      <div id="video-container" style="display:flex;flex-wrap:wrap;justify-content: space-evenly;">
+        <div style="margin: 9px 0px 7px 0px;">
+          <video id="local-video" style= "width:min-content ;height:60vh;width:45vw;background-color: rgb(17, 16, 16);margin-top: 24px;" autoplay playsinline>
+          </video>
+          <div style="display: flexbox;justify-content: center; text-align: center;background-color: rgb(247, 243, 243);">
+            <div>
+              <h3 id="label-username" type="hidden"></h3>
+              <input id="username" type="hidden" value="{{request.user.email}}">
+            </div>
+            <button id="btn-toggle-audio" style="border-radius: 60px;margin-bottom: 8px;">Audio Mute</button>
+            <button id="btn-toggle-video" style="border-radius: 50px;margin-bottom: 8px;">Video Off</button>
+          </div>
+        </div>
+        <div id="chat" style="float:right; position:fixed; width: 21.5vw; bottom: 1%;right:0.3%; margin-top: 0; border: 4px solid rgb(52, 52, 53); background-color: rgb(102, 101, 101); ">
+          <div class="chat_2">
+            <h2 style="color:white; justify-content: center;text-align: center; ">
+            </h2>
+            <ul id="menu">User Online</ul>
+            <hr style="color:white;">
+          </div>
+          <hr style="color:white;">
+          <div id="messages">
+            <ul id="message-list" style="color:white; min-width:200px; word-wrap:break-word;"></ul>
+
+          </div>
+          <div class="send_2">
+            <input id="msg" style="border: 3px solid rgba(107, 70, 70, 0.925);" required><button onclick="scrollWin(0, 50)" required id="btn-send-msg">Send Messages</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="voice_r">
+        <button onclick="myFunction()"><i class="fas fa-microphone fa-2x"></i></button>
+    </div>
+
+    <div class="container" style="border: 4px solid rgb(52, 52, 53);" id="myDIV">
+
+      <div class="app">
+
+        <div class="input-single">
+          <textarea id="note-textarea" placeholder="Create a new note by typing or using voice recognition." rows="6"></textarea>
+        </div>
+        <button id="start-record-btn" title="Start Recording">Start</button>
+        <button id="pause-record-btn" title="Pause Recording">Stop</button>
+        <button id="save-note-btn" title="Save Note">Save</button>
+              <p id="recording-instructions">Press the <strong>Start</strong> button</p>
+
+        <h3>Saved</h3>
+        <ul id="notes">
+          <li>
+            <p class="no-notes">None</p>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+
+  <script type="text/javascript">
+    function myFunction() {
+      var x = document.getElementById("myDIV");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
+    function updateScroll(){
+      var element = document.getElementById("messages");
+      element.scrollTop = element.scrollHeight;
+    }
+  </script>
+
+
+
 </body>
+
 </html>
