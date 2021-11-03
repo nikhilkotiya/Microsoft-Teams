@@ -76,6 +76,5 @@ urllib3==1.26.6
 waitress==2.0.0
 websocket-client==0.59.0
 whitenoise==5.2.0
-windows-curses==2.2.0
 wrapt==1.12.1
 zope.interface==5.4.0
