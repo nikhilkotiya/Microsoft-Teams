@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Teams</title>
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+      <style>
+            body{margin:0;background: rgb(208, 226, 243);}
+            .title.is-2{font-size: 43px;margin-bottom:20px;margin-top:10px;text-align: center;font-weight: bold;font-family: Cochin, Georgia;color:rgb(211, 35, 4)}
+            .columns.is-mobile{background-color: white;position:relative;border-radius: 30px;border: 7px solid rgb(65, 150, 206);margin: 1% 8%;min-height: 65vh;}
+            .conservation{width:98%;background-color: rgb(65,150, 206);padding:1%;border-radius:21px 21px 0px 0px ;}
+            .home{background-color:rgb(65, 150, 206);padding: 0.7%;padding-bottom: 1.2%;}
+             .home button{padding: 8px 15px;border-radius: 10px;box-shadow: 5px 5px 5px rgb(36, 35, 35);border:2px solid;}
+             .button.is-success{text-decoration: none;font-size:25px;color:rgb(252, 249, 249) ;padding: 1px;}
+             .box{text-align: center;}
+             #content1{border:1px solid rgb(13, 13, 14);margin:0% 3% 0.5% 0%;background-color:rgb(169, 213, 243); ;border-radius: 10px;}
+             .Email{float: right;margin-right:4%}
+             .User{float: left;color: black}
+             .fa.fa-user-circle{color:black;margin-top:0.5%;font-size:35px;padding:0px 10px ;float: left;}
+
+             @media screen and (max-width:920px){
+                 /* .Email{
+                     
+                 } */
+                 .columns.is-mobile{margin:1% 2%;}
+                 .Email{display: block;color:red;}
+                 ul{padding-left:8px;}
+                 #content1{margin-right: 9px;}
+
+             }
+             @media screen and (max-width:783px){
+                 .Email{float:none;display:inline-block}
+             }
+             @media screen and (max-width:538px){
+                 .User{font-size:small ;}
+                 .fa.fa-user-circle{font-size:25px;padding:10px 5px ;float: left;}
+             }
+             @media screen and (max-width:389px){
+                 .User{font-size:12px}
+                 .fa.fa-user-circle{display:none}
+             }
+
+
+
+      </style>
+  </head>
+<body >
+    <div class="home"><a href="/home"><button >Go Home</button></a>
+    </div>
+    <h1 class="title is-2">
+        Messages
+    </h1>
+    <div class="columns is-mobile">
+        <div class="conservation">
+            <a href="{% url 'usersearch' %}" class="button is-success" >New Conservation..</a>
+        </div><br/>
+        <div class="column is-one-quarter">
+            <aside class="menu">
+                <ul>
+                {% for message in messages %}
+                    <a class="{% if active_direct == message.user.username %}is-active{% endif %}" href="{% url 'directs' message.user.email %}">
+                    <div class="box">
+                        <article class="media" >
+                            <div class="media-content" >
+                                <div class="content" id="content1">
+                                    <i class="fa fa-user-circle" ></i>
+                                    <p style="margin-top:15px;margin-bottom:9px;">
+                                        <span class="User"> User - {{ message.user.first_name}} {{message.user.last_name}}</span>
+                                        <span class="Email"> Email-  <small>{{ message.user.email }}</small></span><br>
+                                    </p>
+                                </div>
+
+                                <div class="content" style="margin-bottom: 1%;">
+                                {% if message.unread %}
+                                    <span>unread</span>
+                                    <span style="font-weight: bold; color: rgb(42,86,180);margin-top:0px;margin-left: 5%;">
+                                        <i class="material-icons">mark_chat_unread</i> {{ message.unread }}
+                                    </span>
+                                    {% endif %}        
+                                </div>
+                                 {% endfor %}
+                            </div>
+                    </ul>
+            </aside>
+            <br>
+        </div>
+        <div class="column">
+            <div>
+
+        </div>
+    </div>
+</body>
+</html> 
