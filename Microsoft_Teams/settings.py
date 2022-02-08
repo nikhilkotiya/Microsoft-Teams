@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '*d8&-=lg!_k7h!!z+b4=x&l^u2(wq-4!r*6!z9o=6-%4hkjggo'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 import os
 # Application definition
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     # 'users',
     'accounts',
     'django.contrib.sites',
-    # "chat_box",
+    # "daphne",
     'django_filters',
     'channels',
     'captcha',
@@ -132,6 +132,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 AUTH_USER_MODEL = "accounts.User" 
 SITE_ID = 1
+
 ASGI_APPLICATION = 'Microsoft_Teams.asgi.application'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -144,6 +145,9 @@ RECAPTCHA_REQUIRED_SCORE = 0.85
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("*", 6379)],
+        },
+    },
 }

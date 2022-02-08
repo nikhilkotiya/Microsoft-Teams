@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.conf import settings
-import speech_recognition as sr
+# import speech_recognition as sr
 
 from django.core.mail import send_mail
 from django.contrib import messages
