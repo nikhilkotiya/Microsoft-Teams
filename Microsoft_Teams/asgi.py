@@ -1,19 +1,19 @@
 import os
 import django
-from django.conf import settings
 from channels.routing import ProtocolTypeRouter , URLRouter
 from django.core.asgi import get_asgi_application
-from channels.auth import AuthMiddlewareStack
-import chat.routing
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Microsoft_Teams.settings')
 django.setup()
-django_asgi_app = get_asgi_application()
+
+from channels.auth import AuthMiddleware, AuthMiddlewareStack
+from chat.routing import websocket_urlpatterns
+
 application = ProtocolTypeRouter({
-    "http": django_asgi_app,
-    # Just HTTP for now. (We can add other protocols later.)
+    "http": get_asgi_application(),
     "websocket": AuthMiddlewareStack(
         URLRouter(
-            chat.routing.websocket_urlpatterns
+            websocket_urlpatterns
         )
     )
 })
