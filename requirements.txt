@@ -5,6 +5,7 @@ Automat==20.2.0
 captcha==0.3
 certifi==2021.10.8
 cffi==1.15.0
+channels==3.0.4
 charset-normalizer==2.0.12
 constantly==15.1.0
 cryptography==36.0.1
