@@ -156,6 +156,16 @@ CHANNEL_LAYERS = {
     },
 }
 # CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             #"hosts": [('127.0.0.1', 6379)],
+#             "hosts" : [('redis://:Q3USyA1zpX0Jj6KTqRqaZrtjs1beQq3p@redis-19282.c246.us-east-1-4.ec2.cloud.redislabs.com:19282/0')],
+#         },
+#         #"BACKEND":"channels.layers.InMemoryChannelLayer"
+#     },
+# }
+# CHANNEL_LAYERS = {
 #     "default": {
 #         "BACKEND": "channels.layers.InMemoryChannelLayer"
 #     }
