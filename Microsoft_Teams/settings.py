@@ -158,27 +158,27 @@ import redis
 #         },
 #     },
 # }
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#         'CONFIG': {
-#             #"hosts": [('127.0.0.1', 6379)],
-#             "hosts" : [('redis://:Q3USyA1zpX0Jj6KTqRqaZrtjs1beQq3p@redis-19282.c246.us-east-1-4.ec2.cloud.redislabs.com:19282/0')],
-#         },
-#         #"BACKEND":"channels.layers.InMemoryChannelLayer"
-#     },
-# }
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts" : [('redis://:M6rB1NGZO79rGu9wBuO8yq4ZIqYUZEXN@redis-14600.c14.us-east-1-2.ec2.cloud.redislabs.com:14600')],
+        },
+        #"BACKEND":"channels.layers.InMemoryChannelLayer"
+    },
+}
 # CHANNEL_LAYERS = {
 #     "default": {
 #         "BACKEND": "channels.layers.InMemoryChannelLayer"
 #     }
 # }
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": ["redis://h:954c886918c238905dc2c322c34546bd9dbc2738d32523b12bc36ed2d058c387ec@ec2-34-211-446-320.compute-1.amazonaws.com:7719"],
-        },
-    },
-}  
+from channels_redis.core import RedisChannelLayer
+# print(RedisChannelLayer)
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": ["redis://h:954c886918c238905dc2c322c34546bd9dbc2738d32523b12bc36ed2d058c387ec@ec2-34-211-446-320.compute-1.amazonaws.com:7719"],
+#         },
+#     },
+# }
