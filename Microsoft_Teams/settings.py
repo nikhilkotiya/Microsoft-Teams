@@ -139,6 +139,7 @@ RECAPTCHA_PRIVATE_KEY = "6LezmWsbAAAAAAxcSN9GhxQSKc0A9fjx_4v29uym"
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+
 import redis
 # from channel_l
 # CHANNEL_LAYERS = {
@@ -157,18 +158,27 @@ import redis
 #         },
 #     },
 # }
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            #"hosts": [('127.0.0.1', 6379)],
-            "hosts" : [('redis://:Q3USyA1zpX0Jj6KTqRqaZrtjs1beQq3p@redis-19282.c246.us-east-1-4.ec2.cloud.redislabs.com:19282/0')],
-        },
-        #"BACKEND":"channels.layers.InMemoryChannelLayer"
-    },
-}
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             #"hosts": [('127.0.0.1', 6379)],
+#             "hosts" : [('redis://:Q3USyA1zpX0Jj6KTqRqaZrtjs1beQq3p@redis-19282.c246.us-east-1-4.ec2.cloud.redislabs.com:19282/0')],
+#         },
+#         #"BACKEND":"channels.layers.InMemoryChannelLayer"
+#     },
+# }
 # CHANNEL_LAYERS = {
 #     "default": {
 #         "BACKEND": "channels.layers.InMemoryChannelLayer"
 #     }
 # }
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": ["redis://h:954c886918c238905dc2c322c34546bd9dbc2738d32523b12bc36ed2d058c387ec@ec2-34-211-446-320.compute-1.amazonaws.com:7719"],
+        },
+    },
+}  
