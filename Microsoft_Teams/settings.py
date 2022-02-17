@@ -147,14 +147,14 @@ import redis
 #         },
 #     },
 # }
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("*", 6379)],
-#         },
-#     },
-# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
+        "CONFIG": {
+            "hosts": [("*", 6379)],
+        },
+    },
+}
 # CHANNEL_LAYERS = {
 #     'default': {
 #         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -165,8 +165,8 @@ import redis
 #         #"BACKEND":"channels.layers.InMemoryChannelLayer"
 #     },
 # }
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
-}
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#     }
+# }

@@ -8,7 +8,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
-        self.user = self.scope["user"]
+        # print(self.scope["user"])
+        # self.user = self.scope["user"]
         await self.accept()
     async def disconnect(self ,close_code):
         await self.channel_layer.group_discard(
@@ -23,7 +24,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         action = receive_dict['action']
 
         if (action== 'new-offer') or (action=='new-answer'):
-            username = self.scope["user"]
+            # username = self.scope["user"]
             receiver_channel_name = receive_dict['message']['receiver_channel_name']
             receive_dict['message']['receiver_channel_name'] = self.channel_name
             await self.channel_layer.send(
