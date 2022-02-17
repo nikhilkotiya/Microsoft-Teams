@@ -138,6 +138,7 @@ RECAPTCHA_PRIVATE_KEY = "6LezmWsbAAAAAAxcSN9GhxQSKc0A9fjx_4v29uym"
 RECAPTCHA_REQUIRED_SCORE = 0.85
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+import redis
 # CHANNEL_LAYERS = {
     # "default": {
         # "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -146,7 +147,6 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 #         },
 #     },
 # }
-import redis
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
