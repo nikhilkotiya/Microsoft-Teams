@@ -226,7 +226,7 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
     });
     peer.addEventListener('icecandidate',(event)=>{
         if(event.candidate){
-            console.log("New condidate:",JSON.stringify(peer.localDescription));
+            // console.log("New condidate:",JSON.stringify(peer.localDescription));
             
             return;
         }

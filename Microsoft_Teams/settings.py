@@ -164,7 +164,7 @@ CHANNEL_LAYERS = {
         'CONFIG': {
             "hosts" : [('redis://:M6rB1NGZO79rGu9wBuO8yq4ZIqYUZEXN@redis-19282.c246.us-east-1-4.ec2.cloud.redislabs.com:19282/0')],
         },
-        #"BACKEND":"channels.layers.InMemoryChannelLayer"
+        # "BACKEND":"channels.layers.InMemoryChannelLayer"
     },
 }
 # CHANNEL_LAYERS = {
