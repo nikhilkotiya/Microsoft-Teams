@@ -2,14 +2,13 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_group_name="Test-Room"
   
+        self.room_group_name="Test-Room"
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
         )
-        # print(self.scope["user"])
-        # self.user = self.scope["user"]
+        self.user = self.scope["user"]
         await self.accept()
     async def disconnect(self ,close_code):
         await self.channel_layer.group_discard(
@@ -24,7 +23,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         action = receive_dict['action']
 
         if (action== 'new-offer') or (action=='new-answer'):
-            # username = self.scope["user"]
+            username = self.scope["user"]
             receiver_channel_name = receive_dict['message']['receiver_channel_name']
             receive_dict['message']['receiver_channel_name'] = self.channel_name
             await self.channel_layer.send(

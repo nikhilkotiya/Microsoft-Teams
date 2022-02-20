@@ -11,7 +11,9 @@ from chat.routing import websocket_urlpatterns
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
-    "websocket":URLRouter(
+    "websocket":AuthMiddlewareStack(
+        URLRouter(
             websocket_urlpatterns
+        )
     )
 })
