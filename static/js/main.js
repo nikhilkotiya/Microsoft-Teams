@@ -1,4 +1,3 @@
-console.log("working");
 function createMenuItem(name) {
     let li = document.createElement('li');
     li.textContent = name;
@@ -176,7 +175,7 @@ function createOfferer(peerUsername,receiver_channel_name){
     });
     peer.addEventListener('icecandidate',(event) => {
         if(event.candidate){
-            console.log("New condidate:",JSON.stringify(peer.localDescription));
+            // console.log("New condidate:",JSON.stringify(peer.localDescription));
             
             return;
         }
@@ -312,3 +311,8 @@ function getDataChannels(){
     }
     return datachannels;
 }
+
+
+
+
+
