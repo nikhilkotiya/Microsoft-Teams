@@ -5,7 +5,18 @@ function createMenuItem(name) {
 }
 // get the ul#menu
 const menu = document.querySelector('#menu');
-// add menu item
+let pcConfig = {
+    "iceServers":
+        [
+            { "url": "stun:stun.jap.bloggernepal.com:5349" },
+            {
+                "url": "turn:turn.jap.bloggernepal.com:5349",
+                "username": "guest",
+                "credential": "somepassword"
+            },
+            {"url": "stun:stun.l.google.com:19302"}
+        ]
+};
 window.onbeforeunload = function() {
     return "Are you sure?";
  };
@@ -148,7 +159,7 @@ function sendSignal(action,message){
 
 
 function createOfferer(peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(null);
+    var peer= new RTCPeerConnection(pcConfig);
 
     addLocalTracks(peer);   
     var dc = peer.createDataChannel('channel');
@@ -194,7 +205,7 @@ function createOfferer(peerUsername,receiver_channel_name){
 
 
 function  createAnswerer(offer,peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(null);
+    var peer= new RTCPeerConnection(pcConfig);
 
     addLocalTracks(peer);
 
