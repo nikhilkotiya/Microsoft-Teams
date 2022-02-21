@@ -19,7 +19,7 @@ window.onbeforeunload = function() {
 //         },
 //     ]
 // }
-let pcConfig = {
+let iceConfiguration = {
     "iceServers":
         [
             { "url": "stun:stun.jap.bloggernepal.com:5349" },
@@ -169,7 +169,7 @@ function sendSignal(action,message){
 
 
 function createOfferer(peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(null);
+    var peer= new RTCPeerConnection(iceConfiguration);
 
     addLocalTracks(peer);   
     var dc = peer.createDataChannel('channel');
@@ -215,7 +215,7 @@ function createOfferer(peerUsername,receiver_channel_name){
 
 
 function  createAnswerer(offer,peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(null);
+    var peer= new RTCPeerConnection(iceConfiguration);
 
     addLocalTracks(peer);
 
