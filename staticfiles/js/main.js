@@ -8,7 +8,28 @@ const menu = document.querySelector('#menu');
 // add menu item
 window.onbeforeunload = function() {
     return "Are you sure?";
- };
+};
+// const iceConfiguration = {
+//     iceServers: [
+//         { urls:'stun:stun.mysite.com' },
+//         {
+//             username: 'myuser',
+//             credential: 'userpassword',
+//             urls: 'turn:turn.mysite.com'
+//         },
+//     ]
+// }
+let pcConfig = {
+    "iceServers":
+        [
+            { "url": "stun:stun.jap.bloggernepal.com:5349" },
+            {
+                "url": "turn:turn.jap.bloggernepal.com:5349",
+                "username": "guest",
+                "credential": "000@gogi"
+            }
+        ]
+};
 var labelUsername=document.querySelector('#label-username');
 var usernameInput=document.querySelector('#username'); 
 var btnJoin=document.querySelector('#btn-join'); 
