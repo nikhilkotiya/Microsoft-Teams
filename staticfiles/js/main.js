@@ -23,9 +23,7 @@ let iceConfiguration = {
     "iceServers":
         [
             {
-                "url": "turn:turn.bistri.com:80",
-                "username": "homeo",
-                "credential": "homeo"
+                "url": "stun:stun.l.google.com:19302",
             }
         ]
 };
