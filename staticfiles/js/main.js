@@ -23,9 +23,9 @@ let iceConfiguration = {
     "iceServers":
         [
             {
-                "url": "turn:turn.anyfirewall.com:443?transport=tcp",
-                "username": "webrtc",
-                "credential": "webrtc"
+                "url": "turn:turn.bistri.com:80",
+                "username": "homeo",
+                "credential": "homeo"
             }
         ]
 };
