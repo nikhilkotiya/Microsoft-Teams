@@ -5,20 +5,6 @@ function createMenuItem(name) {
 }
 // get the ul#menu
 const menu = document.querySelector('#menu');
-// add menu item
-window.onbeforeunload = function() {
-    return "Are you sure?";
-};
-// const iceConfiguration = {
-//     iceServers: [
-//         { urls:'stun:stun.mysite.com' },
-//         {
-//             username: 'myuser',
-//             credential: 'userpassword',
-//             urls: 'turn:turn.mysite.com'
-//         },
-//     ]
-// }
 let iceConfiguration = {
     "iceServers":
         [
@@ -27,6 +13,9 @@ let iceConfiguration = {
             }
         ]
 };
+window.onbeforeunload = function() {
+    return "Are you sure?";
+ };
 var labelUsername=document.querySelector('#label-username');
 var usernameInput=document.querySelector('#username'); 
 var btnJoin=document.querySelector('#btn-join'); 
@@ -193,7 +182,7 @@ function createOfferer(peerUsername,receiver_channel_name){
     });
     peer.addEventListener('icecandidate',(event) => {
         if(event.candidate){
-            console.log("New condidate:",JSON.stringify(peer.localDescription));
+            // console.log("New condidate:",JSON.stringify(peer.localDescription));
             
             return;
         }
