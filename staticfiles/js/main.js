@@ -23,9 +23,9 @@ let iceConfiguration = {
     "iceServers":
         [
             {
-                "url": "turn:numb.viagenie.ca",
-                "username": "webrtc@live.com",
-                "credential": "muazkh"
+                "url": "turn:turn.anyfirewall.com:443?transport=tcp",
+                "username": "webrtc",
+                "credential": "webrtc"
             }
         ]
 };
@@ -195,7 +195,7 @@ function createOfferer(peerUsername,receiver_channel_name){
     });
     peer.addEventListener('icecandidate',(event) => {
         if(event.candidate){
-            // console.log("New condidate:",JSON.stringify(peer.localDescription));
+            console.log("New condidate:",JSON.stringify(peer.localDescription));
             
             return;
         }
@@ -246,7 +246,7 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
     });
     peer.addEventListener('icecandidate',(event)=>{
         if(event.candidate){
-            // console.log("New condidate:",JSON.stringify(peer.localDescription));
+            console.log("New condidate:",JSON.stringify(peer.localDescription));
             
             return;
         }
