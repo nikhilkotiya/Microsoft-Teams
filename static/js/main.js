@@ -8,9 +8,21 @@ const menu = document.querySelector('#menu');
 let iceConfiguration = {
     "iceServers":
         [
+            { url: 'stun:stun.gmx.net:3478' },
+            { url: 'stun:stun.l.google.com:19302' },
+            { url: 'stun:stun1.l.google.com:19302' },
+            { url: 'stun:stun2.l.google.com:19302' },
+            { url: 'stun:stun3.l.google.com:19302' },
             {
-                "url": "stun:stun.l.google.com:19302",
-            }
+                url: 'turn:relay.backups.cz',
+                credential: 'webrtc',
+                username: 'webrtc'
+            },
+            {
+                url: 'turn:relay.backups.cz?transport=tcp',
+                credential: 'webrtc',
+                username: 'webrtc'
+            },
         ]
 };
 window.onbeforeunload = function() {
@@ -323,22 +335,22 @@ function getDataChannels(){
 
 
 
-var video = {
-        mandatory: {
-            maxWidth: 1024,
-            maxHeight: 768,
-            minWidth: 1024,
-            minHeight: 768,
-            }
-    };
-navigator.getUserMedia(constraints, onSuccess, onFail);
-        function onSuccess(stream) {
-            window.stream = stream; // stream available to console
-            video.src = window.URL.createObjectURL(stream);
-            video.play();
-        }
-        video.addEventListener("playing", function () {
-            setTimeout(function () {
-                console.log("Stream dimensions" + " video.videoWidth" + "x" + video.videoHeight);
-            }, 500);
-        });
+// var video = {
+//         mandatory: {
+//             maxWidth: 1024,
+//             maxHeight: 768,
+//             minWidth: 1024,
+//             minHeight: 768,
+//             }
+//     };
+// navigator.getUserMedia(constraints, onSuccess, onFail);
+//         function onSuccess(stream) {
+//             window.stream = stream; // stream available to console
+//             video.src = window.URL.createObjectURL(stream);
+//             video.play();
+//         }
+//         video.addEventListener("playing", function () {
+//             setTimeout(function () {
+//                 console.log("Stream dimensions" + " video.videoWidth" + "x" + video.videoHeight);
+//             }, 500);
+//         });
