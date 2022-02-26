@@ -233,7 +233,7 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
     });
     peer.addEventListener('icecandidate',(event)=>{
         if(event.candidate){
-            console.log("New condidate:",JSON.stringify(peer.localDescription));
+            // console.log("New condidate:",JSON.stringify(peer.localDescription));
             
             return;
         }
@@ -323,3 +323,22 @@ function getDataChannels(){
 
 
 
+var video = {
+        mandatory: {
+            maxWidth: 1024,
+            maxHeight: 768,
+            minWidth: 1024,
+            minHeight: 768,
+            }
+    };
+navigator.getUserMedia(constraints, onSuccess, onFail);
+        function onSuccess(stream) {
+            window.stream = stream; // stream available to console
+            video.src = window.URL.createObjectURL(stream);
+            video.play();
+        }
+        video.addEventListener("playing", function () {
+            setTimeout(function () {
+                console.log("Stream dimensions" + " video.videoWidth" + "x" + video.videoHeight);
+            }, 500);
+        });

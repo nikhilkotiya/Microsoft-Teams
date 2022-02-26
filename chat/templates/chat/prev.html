@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'main.css' %}">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  <!-- <style>
+  video : {
+    "mandatory": {
+   "minWidth": 320,
+   "maxWidth": 1280,
+   "minHeight": 180,
+   "maxHeight": 720,
+   "minFrameRate": 30
+  }, -->
+  <!-- </style> -->
+</head>
+
+<body>
+  <div class="head2">
+
+    <input type="hidden" name="smname" id="smname" />
+      <button id="btn-join"> Join Room </button>
+    </div>
+    <div class="main-grid-container">
+      <div id="video-container" style="object-fit: cover;">
+          <video id="local-video"autoplay playsinline style= "object-fit: cover;height:60vh;width:45vw">
+          </video>
+        </div>
+      </div>
+              <h3 id="label-username" type="hidden"></h3>
+              <input id="username" type="hidden" value="{{request.user.email}}">
+        <div id="chat">
+          <div class="chat_2">
+
+
+
+    </div>
+  </div>
+  </div>
+  <ul id="menu">User Online</ul>
+  <button id="btn-toggle-audio" >Audio Mute</button>
+  <button id="btn-toggle-video" >Video Off</button>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+  <script src="{% static 'js/main.js' %}"></script>
+  <!-- <script src="{% static 'js/speach.js' %}"></script> -->
+
+</body>
+
+</html>
