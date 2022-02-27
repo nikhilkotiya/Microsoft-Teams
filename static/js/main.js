@@ -5,16 +5,16 @@ function createMenuItem(name) {
 }
 // get the ul#menu
 const menu = document.querySelector('#menu');
-let iceConfiguration = {
-    "iceServers":
-        [
-            {
-                url: 'turn:relay.backups.cz',
-                credential: 'webrtc',
-                username: 'webrtc'
-            }
-        ]
-};
+// let iceConfiguration = {
+//     "iceServers":
+//         [
+//             {
+//                 url: 'turn:relay.backups.cz',
+//                 credential: 'webrtc',
+//                 username: 'webrtc'
+//             }
+//         ]
+// };
 window.onbeforeunload = function() {
     return "Are you sure?";
  };
@@ -157,7 +157,7 @@ function sendSignal(action,message){
 
 
 function createOfferer(peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(iceConfiguration);
+    var peer= new RTCPeerConnection(null);
 
     addLocalTracks(peer);   
     var dc = peer.createDataChannel('channel');
@@ -203,7 +203,7 @@ function createOfferer(peerUsername,receiver_channel_name){
 
 
 function  createAnswerer(offer,peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(iceConfiguration);
+    var peer= new RTCPeerConnection(null);
 
     addLocalTracks(peer);
 
