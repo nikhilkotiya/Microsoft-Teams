@@ -5,11 +5,49 @@ function createMenuItem(name) {
 }
 // get the ul#menu
 const menu = document.querySelector('#menu');
+// let iceConfiguration = {
+//     "iceServers":
+//         [
+//             {
+//                 url: 'turn:relay.backups.cz',
+//                 credential: 'webrtc',
+//                 username: 'webrtc'
+//             }
+//         ]
+// };
 let iceConfiguration = {
     "iceServers":
         [
+            { url :' stun4.l.google.com:19302'},
+            { url: 'stunserver.org:3478'},
+            { url: 'stun:stun.l.google.com:19302' },
+            { url: 'stun:stun1.l.google.com:19302' },
+            { url: 'stun:stun2.l.google.com:19302' },
+            { url: 'stun:stun3.l.google.com:19302' },
             {
-                "url": "stun:stun.l.google.com:19302",
+                url: 'turn:numb.viagenie.ca',
+                credential: 'muazkh',
+                username: 'webrtc@live.com'
+            },
+            {
+                url: 'turn:192.158.29.39:3478?transport=udp',
+                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+                username: '28224511:1379330808'
+            },
+            {
+                url: 'turn:192.158.29.39:3478?transport=tcp',
+                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+                username: '28224511:1379330808'
+            },
+            {
+                url: 'turn:turn.bistri.com:80',
+                credential: 'homeo',
+                username: 'homeo'
+             },
+             {
+                url: 'turn:turn.anyfirewall.com:443?transport=tcp',
+                credential: 'webrtc',
+                username: 'webrtc'
             }
         ]
 };
@@ -155,7 +193,7 @@ function sendSignal(action,message){
 
 
 function createOfferer(peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(iceConfiguration);
+    var peer= new RTCPeerConnection(null);
 
     addLocalTracks(peer);   
     var dc = peer.createDataChannel('channel');
@@ -201,7 +239,7 @@ function createOfferer(peerUsername,receiver_channel_name){
 
 
 function  createAnswerer(offer,peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(iceConfiguration);
+    var peer= new RTCPeerConnection(null);
 
     addLocalTracks(peer);
 
@@ -233,7 +271,7 @@ function  createAnswerer(offer,peerUsername,receiver_channel_name){
     });
     peer.addEventListener('icecandidate',(event)=>{
         if(event.candidate){
-            console.log("New condidate:",JSON.stringify(peer.localDescription));
+            // console.log("New condidate:",JSON.stringify(peer.localDescription));
             
             return;
         }
@@ -323,3 +361,22 @@ function getDataChannels(){
 
 
 
+// var video = {
+//         mandatory: {
+//             maxWidth: 1024,
+//             maxHeight: 768,
+//             minWidth: 1024,
+//             minHeight: 768,
+//             }
+//     };
+// navigator.getUserMedia(constraints, onSuccess, onFail);
+//         function onSuccess(stream) {
+//             window.stream = stream; // stream available to console
+//             video.src = window.URL.createObjectURL(stream);
+//             video.play();
+//         }
+//         video.addEventListener("playing", function () {
+//             setTimeout(function () {
+//                 console.log("Stream dimensions" + " video.videoWidth" + "x" + video.videoHeight);
+//             }, 500);
+//         });
