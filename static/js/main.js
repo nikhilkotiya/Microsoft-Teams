@@ -8,21 +8,11 @@ const menu = document.querySelector('#menu');
 let iceConfiguration = {
     "iceServers":
         [
-            { url: 'stun:stun.gmx.net:3478' },
-            { url: 'stun:stun.l.google.com:19302' },
-            { url: 'stun:stun1.l.google.com:19302' },
-            { url: 'stun:stun2.l.google.com:19302' },
-            { url: 'stun:stun3.l.google.com:19302' },
             {
                 url: 'turn:relay.backups.cz',
                 credential: 'webrtc',
                 username: 'webrtc'
-            },
-            {
-                url: 'turn:relay.backups.cz?transport=tcp',
-                credential: 'webrtc',
-                username: 'webrtc'
-            },
+            }
         ]
 };
 window.onbeforeunload = function() {
