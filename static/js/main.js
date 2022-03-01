@@ -203,7 +203,7 @@ function sendSignal(action,message){
 
 
 function createOfferer(peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(iceConfiguration);
+    var peer= new RTCPeerConnection(null);
 
     addLocalTracks(peer);   
     var dc = peer.createDataChannel('channel');
