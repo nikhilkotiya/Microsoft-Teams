@@ -204,7 +204,7 @@ function sendSignal(action,message){
 
 function createOfferer(peerUsername,receiver_channel_name){
     var peer= new RTCPeerConnection(iceConfiguration);
-    print(peer)
+    console.log(peer)
     addLocalTracks(peer);   
     var dc = peer.createDataChannel('channel');
     dc.addEventListener('open',() =>{
@@ -250,7 +250,7 @@ function createOfferer(peerUsername,receiver_channel_name){
 
 function  createAnswerer(offer,peerUsername,receiver_channel_name){
     var peer= new RTCPeerConnection(iceConfiguration);
-    print(peer)
+    console.log(peer)
     addLocalTracks(peer);
 
     var remoteVideo= createVideo(peerUsername);

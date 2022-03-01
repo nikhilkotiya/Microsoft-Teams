@@ -18,8 +18,8 @@ const menu = document.querySelector('#menu');
 let iceConfiguration = {
     "iceServers":
         [
-            { url :' stun4.l.google.com:19302'},
-            { url: 'stunserver.org:3478'},
+            // { url :'stun4.l.google.com:19302'},
+            // { url: 'stunserver.org:3478'},
             { url: 'stun:stun.l.google.com:19302' },
             { url: 'stun:stun1.l.google.com:19302' },
             { url: 'stun:stun2.l.google.com:19302' },
@@ -28,6 +28,16 @@ let iceConfiguration = {
                 url: 'turn:numb.viagenie.ca',
                 credential: 'muazkh',
                 username: 'webrtc@live.com'
+            },
+            {
+                url: 'turn:relay.backups.cz',
+                credential: 'webrtc',
+                username: 'webrtc'
+            },
+            {
+                url: 'turn:relay.backups.cz?transport=tcp',
+                credential: 'webrtc',
+                username: 'webrtc'
             },
             {
                 url: 'turn:192.158.29.39:3478?transport=udp',
@@ -193,8 +203,8 @@ function sendSignal(action,message){
 
 
 function createOfferer(peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(null);
-
+    var peer= new RTCPeerConnection(iceConfiguration);
+    print(peer)
     addLocalTracks(peer);   
     var dc = peer.createDataChannel('channel');
     dc.addEventListener('open',() =>{
@@ -239,8 +249,8 @@ function createOfferer(peerUsername,receiver_channel_name){
 
 
 function  createAnswerer(offer,peerUsername,receiver_channel_name){
-    var peer= new RTCPeerConnection(null);
-
+    var peer= new RTCPeerConnection(iceConfiguration);
+    print(peer)
     addLocalTracks(peer);
 
     var remoteVideo= createVideo(peerUsername);
