@@ -16,49 +16,17 @@ const menu = document.querySelector('#menu');
 //         ]
 // };
 let iceConfiguration = {
-    "iceServers":
-        [
-            // { url :'stun4.l.google.com:19302'},
-            // { url: 'stunserver.org:3478'},
-            { url: 'stun:stun.l.google.com:19302' },
-            { url: 'stun:stun1.l.google.com:19302' },
-            { url: 'stun:stun2.l.google.com:19302' },
-            { url: 'stun:stun3.l.google.com:19302' },
-            {
-                url: 'turn:numb.viagenie.ca',
-                credential: 'muazkh',
-                username: 'webrtc@live.com'
-            },
-            {
-                url: 'turn:relay.backups.cz',
-                credential: 'webrtc',
-                username: 'webrtc'
-            },
-            {
-                url: 'turn:relay.backups.cz?transport=tcp',
-                credential: 'webrtc',
-                username: 'webrtc'
-            },
-            {
-                url: 'turn:192.158.29.39:3478?transport=udp',
-                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-                username: '28224511:1379330808'
-            },
-            {
-                url: 'turn:192.158.29.39:3478?transport=tcp',
-                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-                username: '28224511:1379330808'
-            },
-            {
-                url: 'turn:turn.bistri.com:80',
-                credential: 'homeo',
-                username: 'homeo'
-             },
-             {
-                url: 'turn:turn.anyfirewall.com:443?transport=tcp',
-                credential: 'webrtc',
-                username: 'webrtc'
-            }
+iceServers: [
+    {   urls: [ "stun:bn-turn1.xirsys.com" ]},
+    {   username: "WIuNXgvM4z-B64B-fmjFDGvZb_9NMciY866Z3_YI_wAEVeKcwy1EelJOmogBmoyrAAAAAGI7J_5uaWtoaWxrb3RpeWE4",  
+        credential: "9994e222-aab1-11ec-bf74-0242ac140004",   
+        urls: [     "turn:bn-turn1.xirsys.com:80?transport=udp",       
+                    "turn:bn-turn1.xirsys.com:3478?transport=udp",     
+                    "turn:bn-turn1.xirsys.com:80?transport=tcp",       
+                    "turn:bn-turn1.xirsys.com:3478?transport=tcp",
+                    "turns:bn-turn1.xirsys.com:443?transport=tcp",      
+                    "turns:bn-turn1.xirsys.com:5349?transport=tcp"   ]
+                    }
         ]
 };
 window.onbeforeunload = function() {
