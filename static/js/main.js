@@ -16,28 +16,28 @@ const menu = document.querySelector('#menu');
 //         ]
 // };
 let iceConfiguration = {
-iceServers: [
-    {   urls: [ "stun:bn-turn1.xirsys.com" ]},
-    {   username: "WIuNXgvM4z-B64B-fmjFDGvZb_9NMciY866Z3_YI_wAEVeKcwy1EelJOmogBmoyrAAAAAGI7J_5uaWtoaWxrb3RpeWE4",  
-        credential: "9994e222-aab1-11ec-bf74-0242ac140004",   
-        urls: [     "turn:bn-turn1.xirsys.com:80?transport=udp",       
-                    "turn:bn-turn1.xirsys.com:3478?transport=udp",     
-                    "turn:bn-turn1.xirsys.com:80?transport=tcp",       
+    iceServers: [
+    {   urls: [ "stun:bn-turn1.xirsys.com" ]},
+    {   username: "WIuNXgvM4z-B64B-fmjFDGvZb_9NMciY866Z3_YI_wAEVeKcwy1EelJOmogBmoyrAAAAAGI7J_5uaWtoaWxrb3RpeWE4",  
+        credential: "9994e222-aab1-11ec-bf74-0242ac140004",   
+        urls: [     "turn:bn-turn1.xirsys.com:80?transport=udp",       
+                    "turn:bn-turn1.xirsys.com:3478?transport=udp",     
+                    "turn:bn-turn1.xirsys.com:80?transport=tcp",       
                     "turn:bn-turn1.xirsys.com:3478?transport=tcp",
-                    "turns:bn-turn1.xirsys.com:443?transport=tcp",      
-                    "turns:bn-turn1.xirsys.com:5349?transport=tcp"   ]
-                    }
+                    "turns:bn-turn1.xirsys.com:443?transport=tcp",      
+                    "turns:bn-turn1.xirsys.com:5349?transport=tcp"]
+                    },
     {
-       username: "bLWW7lBWFqkdorBazT9InfbXJ0qFz20D81WLhKQvkJRKAL93L56Zi6JcvW6oVDw7AAAAAGI8KjRuaWtoaWxrb3RpeWE4",
-       credential: "81976218-ab4b-11ec-8b0c-0242ac140004",
-       urls: [
-           "turn:bn-turn1.xirsys.com:80?transport=udp",
-           "turn:bn-turn1.xirsys.com:3478?transport=udp",
-           "turn:bn-turn1.xirsys.com:80?transport=tcp",
-           "turn:bn-turn1.xirsys.com:3478?transport=tcp",
-           "turns:bn-turn1.xirsys.com:443?transport=tcp",
-           "turns:bn-turn1.xirsys.com:5349?transport=tcp"
-       ]
+    username: "bLWW7lBWFqkdorBazT9InfbXJ0qFz20D81WLhKQvkJRKAL93L56Zi6JcvW6oVDw7AAAAAGI8KjRuaWtoaWxrb3RpeWE4",
+    credential: "81976218-ab4b-11ec-8b0c-0242ac140004",
+    urls: [
+        "turn:bn-turn1.xirsys.com:80?transport=udp",
+        "turn:bn-turn1.xirsys.com:3478?transport=udp",
+        "turn:bn-turn1.xirsys.com:80?transport=tcp",
+        "turn:bn-turn1.xirsys.com:3478?transport=tcp",
+        "turns:bn-turn1.xirsys.com:443?transport=tcp",
+        "turns:bn-turn1.xirsys.com:5349?transport=tcp"
+    ]
     }]
 };
 window.onbeforeunload = function() {
