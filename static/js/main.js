@@ -18,6 +18,7 @@ const menu = document.querySelector('#menu');
 let iceConfiguration = {
     iceServers: [
     {   urls: [ "stun:stun.micorosoft-team.herokuapp.com " ]},
+    {   urls: [ "turn:turn.micorosoft-team.herokuapp.com " ]},
     ]
 };
 window.onbeforeunload = function() {
