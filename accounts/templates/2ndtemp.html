@@ -40,6 +40,7 @@
 						<a href="/private" style="color: black;">Chat</a><br>
 						<div class="detail" style="padding: 8vh;font-size: x-large;color: rgb(7, 6, 6);font-weight: 900;" >	
 						<a href="/" style="color: black;">Video Confrencing</a> </div>
+						<a href="/" id="myLink"  onclick="return f1();" style="color: black;">Group call</a> </div>
 						<header>
 							<nav class="nav-list">
 								<ul>
@@ -64,5 +65,11 @@
 	</div>
 	<!-- javascript file added -->
 	<script type="text/javascript" src="{% static 'landingPage.js' %}"></script>
+	<script>
+		document.getElementById("myLink").onclick = function() {
+			var link = document.getElementById("myLink");
+			link.setAttribute("href", "http://127.0.0.1:8000/videocall/inside/"+Date.now());
+		};
+	</script>
 </body>
 </html>

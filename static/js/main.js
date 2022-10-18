@@ -1,4 +1,28 @@
-console.log("working");
+// var clicked=false;
+// function noMovement() {
+//     {
+//       if (global == 0)
+//       {
+//         alert('no movement');  
+//         resetGlobal();                
+//       } 
+//       else
+//       {
+//         global--;
+//       }
+//     }    
+// }
+// function resetGlobal()
+// {
+//   global=100;                    
+// }
+// // setInterval(function(){if(clicked==true){noMovement()}}, 1000);
+// // $(document).ready(function(){
+    
+// //     $('html').mousemove(function(event){
+// //         resetGlobal();
+// //     });
+// // });
 function createMenuItem(name) {
     let li = document.createElement('li');
     li.textContent = name;
@@ -70,6 +94,7 @@ btnJoin.addEventListener('click',() =>{
     webSocket.addEventListener('open',(e)=> {
         console.log("open");
         sendSignal('new-peer',{});
+        clicked=true;
     });      
     webSocket.addEventListener('message',webSocketOnMessage);
     webSocket.addEventListener('close',(e)=> {
@@ -175,9 +200,7 @@ function createOfferer(peerUsername,receiver_channel_name){
         }
     });
     peer.addEventListener('icecandidate',(event) => {
-        if(event.candidate){
-            console.log("New condidate:",JSON.stringify(peer.localDescription));
-            
+        if(event.candidate){            
             return;
         }
         sendSignal('new-offer',{

@@ -7,13 +7,16 @@ import speech_recognition as sr
 from django.core.mail import send_mail
 from django.contrib import messages
 # Create your views here.
-def mian_view(request):
+def mian_view(request,url=None):
     if request.user.is_authenticated:
         context={}
         return render(request,'chat/main.html',context=context)
     else:
         return redirect('index')
 from django.views.decorators.csrf import csrf_exempt
+
+def index(request):
+    return render(request,"chat/Group_call_temp.html")
 
 @csrf_exempt
 def text(request):

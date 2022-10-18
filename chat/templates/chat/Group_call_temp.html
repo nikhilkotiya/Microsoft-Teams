@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+* {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    background: radial-gradient(50% 50% at 50% 50%, #2D0065 0%, #000000 100%);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+
+.bttn-one {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+
+    width: 2rem;
+    height: 1rem;
+
+    border-radius: 1.25em;
+    padding: 2em 3.25em 2em 3.25em;
+    background: rgb(13, 0, 26);
+    color: white;
+    background-blend-mode: multiply;
+    box-shadow: 0em .25em 2em 0em rgba(253, 151, 255, 1);
+
+}
+
+.bttn-one:hover {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+    padding: 0;
+    width: 0;
+    height: 0;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: #FDB0FF;
+    text-shadow: 0px 3px 15px #FB4EFF;
+
+}
+
+
+
+.bttn-two {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+
+    width: 2rem;
+    height: 1rem;
+
+    padding: 2em 3.25em 2em 3.25em;
+    background: #010028;
+    color: white;
+    background-blend-mode: multiply;
+    box-shadow: 0em .25em 2em 0em #B0FFF1;
+    border-radius: 1.25em;
+
+}
+
+.bttn-two:hover {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    text-decoration: none;
+    padding: 0;
+    width: 0;
+    height: 0;
+    align-items: center;
+    text-align: center;
+    color: #B0FFF1;
+    text-shadow: 0px 3px 15px #00FFD1;
+}
+
+
+
+.bttn-three {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+
+    width: 2rem;
+    height: 1rem;
+
+    border-radius: 1.25em;
+    padding: 2em 3.25em 2em 3.25em;
+    background: #00110d;
+    color: white;
+    background-blend-mode: multiply;
+    box-shadow: 0em .25em 2em 0em #CDFF7A;
+}
+
+.bttn-three:hover {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    text-decoration: none;
+    padding: 0;
+    width: 0;
+    height: 0;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FDFFB0;
+
+    text-shadow: 0px 3px 15px #C2C600;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button type="button" class="bttn-one" value="Click Me">Click Me!</button>
+        <a  href="#" id="myLink" onclick="return f1();" class="bttn-two">create_new</a>
+        <button type="button" class="bttn-three">Click Me!</button>
+        
+      </div>
+</body>
+<script>
+    document.getElementById("myLink").onclick = function() {
+        var link = document.getElementById("myLink");
+        link.setAttribute("href", "http://127.0.0.1:8000/videocall/inside/"+Date.now());
+    };
+</script>
+
+</html>
